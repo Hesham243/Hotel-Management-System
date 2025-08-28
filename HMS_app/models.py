@@ -1,4 +1,5 @@
 from datetime import timezone
+from tkinter import CASCADE
 from django.db import models
 
 
@@ -26,7 +27,7 @@ class Room(models.Model):
 
     
 class Booking(models.Model):
-  customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="bookings")
+  ##customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="bookings")
   room_id = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="bookings")
   check_in_date = models.DateField()
   check_out_date = models.DateField()

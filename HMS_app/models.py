@@ -27,7 +27,7 @@ class Room(models.Model):
     
 class Booking(models.Model):
   ##customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="bookings")
-  room_id = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="bookings")
+  room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="bookings")
   check_in_date = models.DateField()
   check_out_date = models.DateField()
   status = models.CharField(max_length=20, choices=[("confirmed","Confirmed"),("cancelled","Cancelled")])

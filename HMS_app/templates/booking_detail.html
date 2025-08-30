@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Booking Details</h2>
+  <table class="table">
+    <tr><th>ID</th><td>{{ booking.id }}</td></tr>
+    <tr><th>Room</th><td>{{ booking.room }}</td></tr>
+    <tr><th>Check-in Date</th><td>{{ booking.check_in_date }}</td></tr>
+    <tr><th>Check-out Date</th><td>{{ booking.check_out_date }}</td></tr>
+    <tr><th>Status</th><td>{{ booking.status }}</td></tr>
+    <tr><th>Guests</th><td>{{ booking.num_guests }}</td></tr>
+    <tr><th>Total Amount</th><td>{{ booking.total_amount }} {{ booking.currency }}</td></tr>
+    <tr><th>Created At</th><td>{{ booking.created_at }}</td></tr>
+  </table>
+  <a href="{% url 'booking-update' booking.id %}" class="btn btn-warning">Edit</a>
+  <a href="{% url 'booking-delete' booking.id %}" class="btn btn-danger">Delete</a>
+  <a href="{% url 'booking-index' %}" class="btn btn-secondary">Back to List</a>
+{% endblock %}

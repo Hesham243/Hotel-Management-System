@@ -1,9 +1,13 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1>About the Hotel</h1>
-<hr />
-<p class="page-content">
-  I like long romantic walks down the produce aisle. Also, I am currently job
-  seeking!
-</p>
+  <h1>About the Hotel</h1>
+  <hr />
+  <p class="page-content">
+    I like long romantic walks down the produce aisle. Also, I am currently job seeking!
+  </p>
 {% endblock %}

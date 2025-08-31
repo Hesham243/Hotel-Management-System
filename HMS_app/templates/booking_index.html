@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/bookings.css' %}">
+{% endblock %}
+
 {% block content %}
   <h2>Bookings</h2>
   <a href="{% url 'booking-create' %}">Create New Booking</a>

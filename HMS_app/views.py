@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Hotel,Room,Booking
 from django.urls import reverse_lazy
@@ -8,6 +7,22 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.decorators import login_required
+
+
+# Sign-in view for login
+def sign_in(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            auth_login(request, user)
+            return redirect('home')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'sign-in.html', {'form': form, 'next': request.GET.get('next', '')})
+
 
 def home(request):
     if request.user.is_authenticated:

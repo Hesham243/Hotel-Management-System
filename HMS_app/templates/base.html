@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="shortcut icon" type="image/png" href="" />
     <title>Hotel</title>
-    {% block head %} 
-    {% endblock %}
+    {% block head %}{% endblock %}
   </head>
   <body>
     <header>
@@ -21,27 +20,26 @@
       <nav>
         <ul>
           {% if user.is_authenticated %}
-              <li><a href="{% url 'About' %}">About</a></li>
-              <li><a href="{% url 'booking-index' %}">Bookings</a></li>
-              <li><a href="{% url "Rooms" %}">Rooms</a></li>
-              <li>
-                <form id="logout-form" method="post" action="{% url 'logout' %}">
-                  {% csrf_token %}
-                  <button type="submit">Log out</button>
-                </form>
-              </li>
+            <li><a href="{% url 'About' %}">About</a></li>
+            <li><a href="{% url 'booking-index' %}">Bookings</a></li>
+            <li><a href="{% url 'Rooms' %}">Rooms</a></li>
+            <li>
+              <form id="logout-form" method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Log out</button>
+              </form>
+            </li>
           {% else %}
-              <li><a href="{% url 'About' %}">About</a></li>
-              <li><a href="{% url 'Rooms' %}">Rooms</a></li>
-              <li><a href="{% url 'home' %}">Login</a></li>
-              <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'About' %}">About</a></li>
+            <li><a href="{% url 'Rooms' %}">Rooms</a></li>
+            <li><a href="{% url 'sign-in' %}">Sign In</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
           {% endif %}
         </ul>
       </nav>
     </header>
     <main>
-     {% block content %} 
-     {% endblock %}
-     </main>
+      {% block content %}{% endblock %}
+    </main>
   </body>
 </html>

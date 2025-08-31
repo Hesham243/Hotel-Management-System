@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/booking_detail.css' %}">
+{% endblock %}
+
 {% block content %}
   <h2>Booking Details</h2>
   <table>

@@ -77,8 +77,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'hotelcollector',
-        'USER': 'Hesham',
-        'PASSWORD': '123'
     }
 }
 

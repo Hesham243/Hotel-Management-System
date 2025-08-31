@@ -17,8 +17,9 @@ def rooms(request):
     return render(request, 'room/index.html', {"rooms": rooms})
 
 def room_detail(request, room_id):
-    room = Room.objects.get(id=room_id)
-    return render (request, 'room/detail.html', {'room':room})
+    room = get_object_or_404(Room, id=room_id)
+    images = room.images.all()
+    return render (request, 'room/detail.html', {'room':room}, {'images':images})
     
 def booking_index(request):
     bookings = Booking.objects.all()

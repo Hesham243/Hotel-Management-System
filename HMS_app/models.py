@@ -2,6 +2,7 @@ from django.utils import timezone
 from django.db import models
 
 
+
 class Hotel(models.Model):
     name = models.CharField(max_length=100)
     rating = models.IntegerField()
@@ -12,17 +13,30 @@ class Hotel(models.Model):
     
     
 class Room(models.Model):
-    hotel_id = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="rooms")
-    number = models.IntegerField(max_length=1200)
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="rooms")
     type = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=10,decimal_places=2)
-    status = models.CharField(max_length=20, choices=[("available","Available"),("booked","Booked")])
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20, choices=[("available", "Available"), ("booked", "Booked")])
     max_occupancy = models.IntegerField()
-    images = models.CharField()
+
+    def __str__(self):
+      return f"{self.type} - {self.hotel.name}"
+
+
+class RoomNumber(models.Model):
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="room_numbers")
+    number = models.IntegerField()
     
     def __str__(self):
-        return self.name
-    
+      return f"Room Number {self.number} in {self.room.type}"
+
+
+class RoomImage(models.Model):
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="images")
+    image_url = models.CharField()
+
+    def __str__(self):
+      return f"Image for {self.room.type} - {self.image_url}"
 
     
 class Booking(models.Model):

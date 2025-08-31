@@ -13,13 +13,13 @@ def about(request):
     return render(request, 'about.html')
 
 def rooms(request):
-    rooms = Room.objects.all()
+    rooms = Room.objects.prefetch_related('images').all()
     return render(request, 'room/index.html', {"rooms": rooms})
 
 def room_detail(request, room_id):
     room = get_object_or_404(Room, id=room_id)
     images = room.images.all()
-    return render (request, 'room/detail.html', {'room':room}, {'images':images})
+    return render (request, 'room/detail.html', {'room':room, 'images':images})
     
 def booking_index(request):
     bookings = Booking.objects.all()

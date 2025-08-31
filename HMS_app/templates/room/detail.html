@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/room/details.css' %}">
+<link rel="stylesheet" href="{% static 'css/room/detail.css' %}">
 {% endblock %}
 
 {% block content %}
     <section class='header'>
-        <h1>{{ room.type }}</h1>
+        <h1>{{room.type}}</h1>
     </section>
-
     <section class="card-container">
         <div class="card">
             <h2 class="card-price">${{ room.price }}</h2>

@@ -1,23 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static "css/room/index.css" %}">
-{% endblock  %}
+<link rel="stylesheet" href="{% static 'css/room/index.css' %}">
+{% endblock %}
+
 {% block content %}
-    <section class = 'header'>
+    <section class='header'>
         <h1>All Rooms in the Hotel</h1>
     </section>
 
-    <section class ="card-container">
-        {% for room in rooms  %}
+    <section class="card-container">
+        {% for room in rooms %}
             <div class="card">
-                <a href="{% url "room-detail" room.id %}">
-                    <img src="{{image.image_url}}" alt="room">
-                    <h2 class="card-type">{{room.type}}</h2>
-                    <h2 class="card-max">{{room.max_occupancy}}</h2>
+                <a href="{% url 'room-detail' room.id %}">
+                    {% if room.images.all %}
+                        <img src="{{ room.images.first.image_url }}" alt="room">
+                    {% else %}
+                        <img src="{% static 'path/to/default/image.jpg' %}" alt="Default room image">
+                    {% endif %}
+                    <h2 class="card-type">{{ room.type }}</h2>
+                    <h2 class="card-max">Max Occupancy: {{ room.max_occupancy }}</h2>
                 </a>
             </div>
         {% endfor %}
     </section>
-
-{% endblock  %}
+{% endblock %}

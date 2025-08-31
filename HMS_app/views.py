@@ -40,7 +40,7 @@ def room_detail(request, room_id):
 @login_required
 def booking_index(request):
     bookings = Booking.objects.filter(user=request.user)
-    return render(request, 'booking_index.html', {'bookings': bookings})
+    return render(request, 'booking/booking_index.html', {'bookings': bookings})
 
 @login_required
 def booking_detail(request, booking_id):
@@ -84,6 +84,11 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        # Set status to confirmed
+        form.instance.status = 'confirmed'
+        # Calculate total_amount
+        nights = (form.instance.check_out_date - form.instance.check_in_date).days
+        form.instance.total_amount = nights * form.instance.room.price
         return super().form_valid(form)
 
 

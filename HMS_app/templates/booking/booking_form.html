@@ -5,7 +5,7 @@
     <div style="margin-bottom: 16px; padding: 10px; background: #f7f7f7; border-radius: 8px;">
       <strong>Room:</strong> {{ room_obj.type }}<br>
       <strong>Hotel:</strong> {{ room_obj.hotel.name }}<br>
-      <strong>Price:</strong> ${{ room_obj.price }}<br>
+      <strong>Price per Night:</strong> ${{ room_obj.price }}<br>
       <strong>Max Occupancy:</strong> {{ room_obj.max_occupancy }}
     </div>
   {% endif %}
@@ -15,14 +15,39 @@
       {{ form.room }}
       {{ form.check_in_date.label_tag }} {{ form.check_in_date }}<br>
       {{ form.check_out_date.label_tag }} {{ form.check_out_date }}<br>
-      {{ form.status.label_tag }} {{ form.status }}<br>
       {{ form.num_guests.label_tag }} {{ form.num_guests }}<br>
-      {{ form.total_amount.label_tag }} {{ form.total_amount }}<br>
-      {{ form.currency.label_tag }} {{ form.currency }}<br>
     {% else %}
       {{ form.as_p }}
     {% endif %}
-    <button type="submit">Save</button>
+    <div id="booking-summary" style="margin: 16px 0; padding: 10px; background: #eafbe7; border-radius: 8px; display:none;">
+      <strong>Total Nights:</strong> <span id="nights"></span><br>
+      <strong>Total Price:</strong> $<span id="total"></span>
+    </div>
+    <button type="submit">Book Now</button>
     <a href="{% url 'booking-index' %}">Cancel</a>
   </form>
+  <script>
+    // Simple JS to calculate nights and total price
+    function calcBookingSummary() {
+      const checkIn = document.getElementById('id_check_in_date').value;
+      const checkOut = document.getElementById('id_check_out_date').value;
+      const price = {{ room_obj.price|default:0 }};
+      if (checkIn && checkOut) {
+        const d1 = new Date(checkIn);
+        const d2 = new Date(checkOut);
+        const nights = (d2 - d1) / (1000*60*60*24);
+        if (nights > 0) {
+          document.getElementById('booking-summary').style.display = '';
+          document.getElementById('nights').innerText = nights;
+          document.getElementById('total').innerText = (nights * price).toFixed(2);
+        } else {
+          document.getElementById('booking-summary').style.display = 'none';
+        }
+      } else {
+        document.getElementById('booking-summary').style.display = 'none';
+      }
+    }
+    document.getElementById('id_check_in_date').addEventListener('change', calcBookingSummary);
+    document.getElementById('id_check_out_date').addEventListener('change', calcBookingSummary);
+  </script>
 {% endblock %}

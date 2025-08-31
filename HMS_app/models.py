@@ -1,13 +1,23 @@
 from django.utils import timezone
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Hotel(models.Model):
-    name = models.CharField(max_length=100)
-    rating = models.IntegerField()
-    timezone = models.CharField(max_length=50)
-    checkin_time = models.TimeField()
-    checkout_time = models.TimeField()
+    name = models.CharField(max_length=255)
+    rating = models.DecimalField(
+    max_digits=2,
+    decimal_places=1,
+    default=0.0,
+    validators=[MinValueValidator(0.0), MaxValueValidator(5.0)]
+    )
+    timezone = models.CharField(max_length=64, default="Asia/Bahrain")
+    checkin_time = models.TimeField(default="15:00")
+    checkout_time = models.TimeField(default="11:00")
+    # created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.name} ({self.rating}:star:)"
     
     
     
@@ -21,7 +31,7 @@ class Room(models.Model):
     images = models.CharField()
     
     def __str__(self):
-        return self.name
+        return self.type
     
 
     

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{% if form.instance.pk %}Edit Booking{% else %}Create Booking{% endif %}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% if form.room.value %}
+      {# Hide room label if room is pre-selected #}
+      {{ form.room }}
+      {{ form.check_in_date.label_tag }} {{ form.check_in_date }}<br>
+      {{ form.check_out_date.label_tag }} {{ form.check_out_date }}<br>
+      {{ form.status.label_tag }} {{ form.status }}<br>
+      {{ form.num_guests.label_tag }} {{ form.num_guests }}<br>
+      {{ form.total_amount.label_tag }} {{ form.total_amount }}<br>
+      {{ form.currency.label_tag }} {{ form.currency }}<br>
+    {% else %}
+      {{ form.as_p }}
+    {% endif %}
+  <button type="submit">Save</button>
+  <a href="{% url 'booking-index' %}">Cancel</a>
+  </form>
+{% endblock %}

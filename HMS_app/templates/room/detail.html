@@ -21,6 +21,7 @@
                     <p>No images available.</p>
                 {% endfor %}
             </div>
+            <a href="{% url 'booking-create-for-room' room.id %}">Book this room</a>
         </div>
     </section>
 {% endblock %}

@@ -59,8 +59,9 @@ class RoomImage(models.Model):
       return f"Image for {self.room.type} - {self.image_url}"
 
 
+
 class Booking(models.Model):
-  # customer= models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="bookings", null=True)
+  user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name="bookings")
   room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="bookings")
   check_in_date = models.DateField()
   check_out_date = models.DateField()

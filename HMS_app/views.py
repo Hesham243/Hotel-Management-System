@@ -7,7 +7,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from .forms import BookingForm
 
 def home(request):
-    return HttpResponse('<h1>Hello customer</h1>')
+    return render(request, 'home.html')
 
 def about(request):
     return render(request, 'about.html')

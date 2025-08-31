@@ -39,8 +39,18 @@ def room_detail(request, room_id):
     
 @login_required
 def booking_index(request):
+    cancelled = False
+    # Handle cancellation
+    if request.method == 'POST':
+        booking_id = request.POST.get('cancel_booking_id')
+        if booking_id:
+            booking = Booking.objects.filter(id=booking_id, user=request.user, status='confirmed').first()
+            if booking:
+                booking.status = 'cancelled'
+                booking.save()
+                cancelled = True
     bookings = Booking.objects.filter(user=request.user)
-    return render(request, 'booking/booking_index.html', {'bookings': bookings})
+    return render(request, 'booking/booking_index.html', {'bookings': bookings, 'cancelled': cancelled})
 
 @login_required
 def booking_detail(request, booking_id):

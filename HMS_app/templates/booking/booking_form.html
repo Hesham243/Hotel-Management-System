@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
   <h2>{% if form.instance.pk %}Edit Booking{% else %}Create Booking{% endif %}</h2>
+  {% if room_obj %}
+    <div style="margin-bottom: 16px; padding: 10px; background: #f7f7f7; border-radius: 8px;">
+      <strong>Room:</strong> {{ room_obj.type }}<br>
+      <strong>Hotel:</strong> {{ room_obj.hotel.name }}<br>
+      <strong>Price:</strong> ${{ room_obj.price }}<br>
+      <strong>Max Occupancy:</strong> {{ room_obj.max_occupancy }}
+    </div>
+  {% endif %}
   <form method="post">
     {% csrf_token %}
     {% if form.room.value %}
-      {# Hide room label if room is pre-selected #}
       {{ form.room }}
       {{ form.check_in_date.label_tag }} {{ form.check_in_date }}<br>
       {{ form.check_out_date.label_tag }} {{ form.check_out_date }}<br>
@@ -15,7 +22,7 @@
     {% else %}
       {{ form.as_p }}
     {% endif %}
-  <button type="submit">Save</button>
-  <a href="{% url 'booking-index' %}">Cancel</a>
+    <button type="submit">Save</button>
+    <a href="{% url 'booking-index' %}">Cancel</a>
   </form>
 {% endblock %}

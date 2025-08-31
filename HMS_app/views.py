@@ -55,8 +55,9 @@ def booking_detail(request, booking_id):
 class BookingCreateView(LoginRequiredMixin, CreateView):
     model = Booking
     form_class = BookingForm
-    template_name = 'booking_form.html'
+    template_name = 'booking/booking_form.html'
     success_url = reverse_lazy('booking-index')
+
 
     def get_initial(self):
         initial = super().get_initial()
@@ -72,6 +73,14 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
             form.fields['room'].widget.attrs['readonly'] = True
             form.fields['room'].widget = forms.HiddenInput()
         return form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        room_id = self.kwargs.get('room_id')
+        if room_id:
+            from .models import Room
+            context['room_obj'] = Room.objects.get(pk=room_id)
+        return context
 
     def form_valid(self, form):
         form.instance.user = self.request.user

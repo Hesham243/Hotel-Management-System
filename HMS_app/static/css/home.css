@@ -1,3 +1,47 @@
+/* Home Hero Section Styles */
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  background: linear-gradient(120deg, #eafbe7 0%, #f7f7f7 100%);
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  margin: 32px 0 24px 0;
+  padding: 36px 18px 32px 18px;
+}
+
+.home-hero h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #1a8000;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.home-desc {
+  font-size: 1.3rem;
+  color: #444;
+  margin-bottom: 28px;
+  text-align: center;
+  max-width: 500px;
+}
+
+.home-cta {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.home-cta .btn {
+  font-size: 1.2em;
+  padding: 10px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(26,128,0,0.07);
+}
 main {
   display: flex;
   align-items: center;

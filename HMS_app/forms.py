@@ -11,5 +11,7 @@ class BookingForm(forms.ModelForm):
         # Hide room field if initial is set (for booking a specific room)
         if self.initial.get('room'):
             self.fields['room'].widget = forms.HiddenInput()
-        self.fields['check_in_date'].widget = forms.DateInput(attrs={'type': 'date'})
-        self.fields['check_out_date'].widget = forms.DateInput(attrs={'type': 'date'})
+        import datetime
+        today = datetime.date.today().isoformat()
+        self.fields['check_in_date'].widget = forms.DateInput(attrs={'type': 'date', 'min': today})
+        self.fields['check_out_date'].widget = forms.DateInput(attrs={'type': 'date', 'min': today})

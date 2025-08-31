@@ -1,53 +1,55 @@
 {% extends 'base.html' %}
 {% block content %}
   <h2>{% if form.instance.pk %}Edit Booking{% else %}Create Booking{% endif %}</h2>
+  {% if form.non_field_errors %}
+    <div class="form-error">
+      {% for error in form.non_field_errors %}
+        <div>{{ error }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
   {% if room_obj %}
-    <div style="margin-bottom: 16px; padding: 10px; background: #f7f7f7; border-radius: 8px;">
+    <section class="form-section">
       <strong>Room:</strong> {{ room_obj.type }}<br>
       <strong>Hotel:</strong> {{ room_obj.hotel.name }}<br>
       <strong>Price per Night:</strong> ${{ room_obj.price }}<br>
       <strong>Max Occupancy:</strong> {{ room_obj.max_occupancy }}
-    </div>
+    </section>
   {% endif %}
-  <form method="post">
+  {% if room_obj and room_obj.bookings.exists %}
+    <section class="form-section form-warning">
+      <strong>Unavailable Dates for this Room:</strong>
+      <ul>
+        {% for b in room_obj.bookings.all %}
+          {% if b.status == 'confirmed' %}
+            <li>{{ b.check_in_date }} to {{ b.check_out_date }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <small>Please avoid selecting these dates.</small>
+    </section>
+  {% endif %}
+  <form method="post" class="booking-form">
     {% csrf_token %}
     {% if form.room.value %}
       {{ form.room }}
-      {{ form.check_in_date.label_tag }} {{ form.check_in_date }}<br>
-      {{ form.check_out_date.label_tag }} {{ form.check_out_date }}<br>
-      {{ form.num_guests.label_tag }} {{ form.num_guests }}<br>
+      {{ form.check_in_date.label_tag }} {{ form.check_in_date }}
+      {% if form.check_in_date.errors %}<span class="form-error-inline">{{ form.check_in_date.errors.0 }}</span>{% endif %}<br>
+      {{ form.check_out_date.label_tag }} {{ form.check_out_date }}
+      {% if form.check_out_date.errors %}<span class="form-error-inline">{{ form.check_out_date.errors.0 }}</span>{% endif %}<br>
+      {{ form.num_guests.label_tag }} {{ form.num_guests }}
+      {% if form.num_guests.errors %}<span class="form-error-inline">{{ form.num_guests.errors.0 }}</span>{% endif %}<br>
     {% else %}
       {{ form.as_p }}
     {% endif %}
-    <div id="booking-summary" style="margin: 16px 0; padding: 10px; background: #eafbe7; border-radius: 8px; display:none;">
-      <strong>Total Nights:</strong> <span id="nights"></span><br>
-      <strong>Total Price:</strong> $<span id="total"></span>
-    </div>
-    <button type="submit">Book Now</button>
-    <a href="{% url 'booking-index' %}">Cancel</a>
+    {% if total_nights and total_price %}
+      <div class="form-summary">
+        <strong>Total Nights:</strong> {{ total_nights }}<br>
+        <strong>Total Price:</strong> ${{ total_price }}
+      </div>
+    {% endif %}
+    <button type="submit" class="btn submit">Book Now</button>
+    <a href="{% url 'booking-index' %}" class="btn secondary">Cancel</a>
   </form>
-  <script>
-    // Simple JS to calculate nights and total price
-    function calcBookingSummary() {
-      const checkIn = document.getElementById('id_check_in_date').value;
-      const checkOut = document.getElementById('id_check_out_date').value;
-      const price = {{ room_obj.price|default:0 }};
-      if (checkIn && checkOut) {
-        const d1 = new Date(checkIn);
-        const d2 = new Date(checkOut);
-        const nights = (d2 - d1) / (1000*60*60*24);
-        if (nights > 0) {
-          document.getElementById('booking-summary').style.display = '';
-          document.getElementById('nights').innerText = nights;
-          document.getElementById('total').innerText = (nights * price).toFixed(2);
-        } else {
-          document.getElementById('booking-summary').style.display = 'none';
-        }
-      } else {
-        document.getElementById('booking-summary').style.display = 'none';
-      }
-    }
-    document.getElementById('id_check_in_date').addEventListener('change', calcBookingSummary);
-    document.getElementById('id_check_out_date').addEventListener('change', calcBookingSummary);
-  </script>
 {% endblock %}

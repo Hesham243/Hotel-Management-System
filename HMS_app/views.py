@@ -1,14 +1,15 @@
+import datetime
+from django import forms
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Hotel,Room,Booking
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
-from .forms import BookingForm
-from django import forms
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login as auth_login, logout as auth_logout
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Hotel, Room, Booking
+from .forms import BookingForm
 
 def home(request):
     if request.user.is_authenticated:
@@ -28,8 +29,18 @@ def about(request):
 
 @login_required
 def rooms(request):
+    today = datetime.date.today()
     rooms = Room.objects.prefetch_related('images').all()
-    return render(request, 'room/index.html', {"rooms": rooms})
+    room_list = []
+    for room in rooms:
+        # Count confirmed bookings for this room for today or future
+        booked_count = room.bookings.filter(status='confirmed', check_out_date__gt=today).count()
+        available = room.total - booked_count
+        room_list.append({
+            'obj': room,
+            'available': available
+        })
+    return render(request, 'room/index.html', {"rooms": room_list})
 
 @login_required
 def room_detail(request, room_id):
@@ -37,6 +48,7 @@ def room_detail(request, room_id):
     images = room.images.all()
     return render (request, 'room/detail.html', {'room':room, 'images':images})
     
+
 @login_required
 def booking_index(request):
     cancelled = False
@@ -50,7 +62,16 @@ def booking_index(request):
                 booking.save()
                 cancelled = True
     bookings = Booking.objects.filter(user=request.user)
-    return render(request, 'booking/booking_index.html', {'bookings': bookings, 'cancelled': cancelled})
+    total_count = bookings.count()
+    confirmed_count = bookings.filter(status='confirmed').count()
+    cancelled_count = bookings.filter(status='cancelled').count()
+    return render(request, 'booking/booking_index.html', {
+        'bookings': bookings,
+        'cancelled': cancelled,
+        'total_count': total_count,
+        'confirmed_count': confirmed_count,
+        'cancelled_count': cancelled_count,
+    })
 
 @login_required
 def booking_detail(request, booking_id):
@@ -88,17 +109,30 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         room_id = self.kwargs.get('room_id')
         if room_id:
-            from .models import Room
             context['room_obj'] = Room.objects.get(pk=room_id)
+        # Add booking summary if POST and form is bound
+        form = context.get('form')
+        if self.request.method == 'POST' and form and form.is_bound and form.is_valid():
+            check_in = form.cleaned_data.get('check_in_date')
+            check_out = form.cleaned_data.get('check_out_date')
+            room = form.cleaned_data.get('room')
+            if check_in and check_out and room:
+                nights = (check_out - check_in).days
+                if nights > 0:
+                    context['total_nights'] = nights
+                    context['total_price'] = nights * room.price
         return context
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        # Set status to confirmed
         form.instance.status = 'confirmed'
-        # Calculate total_amount
         nights = (form.instance.check_out_date - form.instance.check_in_date).days
         form.instance.total_amount = nights * form.instance.room.price
+        try:
+            form.instance.full_clean()
+        except Exception as e:
+            form.add_error(None, str(e))
+            return self.form_invalid(form)
         return super().form_valid(form)
 
 
@@ -115,6 +149,16 @@ class BookingUpdateView(LoginRequiredMixin, UpdateView):
     def get_queryset(self):
         return Booking.objects.filter(user=self.request.user)
 
+    def form_valid(self, form):
+        nights = (form.instance.check_out_date - form.instance.check_in_date).days
+        form.instance.total_amount = nights * form.instance.room.price
+        try:
+            form.instance.full_clean()
+        except Exception as e:
+            form.add_error(None, str(e))
+            return self.form_invalid(form)
+        return super().form_valid(form)
+
 
 
 
@@ -129,8 +173,15 @@ class BookingDeleteView(LoginRequiredMixin, DeleteView):
         return Booking.objects.filter(user=self.request.user)
 
 
+from django.contrib import messages
+
 class Home(LoginView):
-    template_name = 'home.html'
+    template_name = 'registration/login.html'
+
+    def get(self, request, *args, **kwargs):
+        if 'next' in request.GET:
+            messages.info(request, 'Please log in to access this page.')
+        return super().get(request, *args, **kwargs)
     
 def signup(request):
     error_message = ''

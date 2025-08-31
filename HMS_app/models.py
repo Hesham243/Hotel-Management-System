@@ -1,7 +1,17 @@
 from django.utils import timezone
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth.models import User
 
+
+# class Customer(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='customer')
+#     full_name = models.CharField(max_length=255)
+#     email = models.EmailField(unique=True)
+#     phone_number = models.CharField(max_length=15, blank=True, null=True)
+
+#     def __str__(self):
+#       return self.full_name
 
 class Hotel(models.Model):
     name = models.CharField(max_length=255)
@@ -27,6 +37,7 @@ class Room(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=20, choices=[("available", "Available"), ("booked", "Booked")])
     max_occupancy = models.IntegerField()
+    total = models.IntegerField()
 
     def __str__(self):
       return f"{self.type} - {self.hotel.name}"
@@ -47,9 +58,9 @@ class RoomImage(models.Model):
     def __str__(self):
       return f"Image for {self.room.type} - {self.image_url}"
 
-    
+
 class Booking(models.Model):
-  ##customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="bookings")
+  # customer= models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="bookings", null=True)
   room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="bookings")
   check_in_date = models.DateField()
   check_out_date = models.DateField()
@@ -60,7 +71,7 @@ class Booking(models.Model):
   created_at = models.DateTimeField(default=timezone.now)
 
   def __str__(self):
-    return f"Booking {self.id} - {self.customer.full_name}"
+    return f"Booking {self.id} "
   
   def clean(self):
     """Custom validation: check_in must be before check_out."""

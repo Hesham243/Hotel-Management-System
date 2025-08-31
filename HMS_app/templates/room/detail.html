@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static "css/room/details.css" %}">
+{% endblock  %}
+{% block content %}
+    <section class = 'header'>
+        <h1>{{room.type}}</h1>
+    </section>
+
+    <section class ="card-container">
+        {% for room in rooms  %}
+            <div class="card">
+                <a href="{% url "room-detail" room.id %}">
+                    <img src="{{room.images}}" alt="room">
+                    <h2 class="card-price">{{room.price}}</h2>
+                    <h2 class="card-max">{{room.max_occupancy}}</h2>
+                </a>
+            </div>
+        {% endfor %}
+    </section>
+
+{% endblock  %}

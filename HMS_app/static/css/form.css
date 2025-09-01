@@ -83,7 +83,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focu
   margin-bottom: 0;
 }
 
-.btn.submit, button[type="submit"] {
+.form-container .btn.submit, .form-container button[type="submit"] {
   width: 100%;
   margin-top: 1.2em;
   background: #2ea44f;
@@ -98,7 +98,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focu
   transition: background 0.18s, color 0.18s;
 }
 
-.btn.submit:hover, button[type="submit"]:hover {
+.form-container .btn.submit:hover, .form-container button[type="submit"]:hover {
   background: #24913c;
   color: #fff;
 }

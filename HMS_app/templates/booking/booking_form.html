@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block head %}
-  {% load static %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="{% static 'css/booking_form.css' %}">
 {% endblock %}
 {% block content %}
-  <h2>{% if form.instance.pk %}Edit Booking{% else %}Create Booking{% endif %}</h2>
+<div class="reservation-container">
+  <h2 class="reservation-title">
+    <i class="fa-solid fa-bed"></i>
+    {% if form.instance.pk %}Edit Booking{% else %}Room Reservation{% endif %}
+  </h2>
+
   {% if form.non_field_errors %}
     <div class="form-error">
       {% for error in form.non_field_errors %}
@@ -14,46 +20,59 @@
   {% endif %}
 
   {% if room_obj %}
-    <section class="form-section">
-      <strong>Room:</strong> {{ room_obj.type }}<br>
-      <strong>Hotel:</strong> {{ room_obj.hotel.name }}<br>
-      <strong>Price per Night:</strong> ${{ room_obj.price }}<br>
-      <strong>Max Occupancy:</strong> {{ room_obj.max_occupancy }}
+    <section class="room-summary">
+      <div class="room-info">
+        <i class="fa-solid fa-hotel"></i> <strong>Hotel:</strong> {{ room_obj.hotel.name }}<br>
+        <i class="fa-solid fa-door-closed"></i> <strong>Room Type:</strong> {{ room_obj.type }}<br>
+        <i class="fa-solid fa-users"></i> <strong>Max Occupancy:</strong> {{ room_obj.max_occupancy }}<br>
+        <i class="fa-solid fa-dollar-sign"></i> <strong>Price/Night:</strong> ${{ room_obj.price }}
+      </div>
     </section>
   {% endif %}
-  {% if room_obj and room_obj.bookings.exists %}
-    <section class="form-section form-warning">
-      <strong>Unavailable Dates for this Room:</strong>
-      <ul>
-        {% for b in room_obj.bookings.all %}
-          {% if b.status == 'confirmed' %}
-            <li>{{ b.check_in_date }} to {{ b.check_out_date }}</li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-      <small>Please avoid selecting these dates.</small>
-    </section>
-  {% endif %}
+
+
+
   <form method="post" class="booking-form">
     {% csrf_token %}
-    {% if form.room.value %}
-      {{ form.room }}
-      {{ form.check_in_date.label_tag }} {{ form.check_in_date }}
-      {% if form.check_in_date.errors %}<span class="form-error-inline">{{ form.check_in_date.errors.0 }}</span>{% endif %}<br>
-      {{ form.check_out_date.label_tag }} {{ form.check_out_date }}
-      {% if form.check_out_date.errors %}<span class="form-error-inline">{{ form.check_out_date.errors.0 }}</span>{% endif %}<br>
-      {{ form.num_guests.label_tag }} {{ form.num_guests }}
-      {% if form.num_guests.errors %}<span class="form-error-inline">{{ form.num_guests.errors.0 }}</span>{% endif %}<br>
-    {% else %}
-      {{ form.as_p }}
-    {% endif %}
+    <div class="form-fields">
+      {% if form.room.value %}
+        {{ form.room }}
+        <div class="form-group">
+          <label for="id_check_in_date"><i class="fa-solid fa-calendar-check"></i> Check-in Date</label>
+          {{ form.check_in_date }}
+          {% if form.check_in_date.errors %}<span class="form-error-inline">{{ form.check_in_date.errors.0 }}</span>{% endif %}
+        </div>
+        <div class="form-group">
+          <label for="id_check_out_date"><i class="fa-solid fa-calendar-day"></i> Check-out Date</label>
+          {{ form.check_out_date }}
+          {% if form.check_out_date.errors %}<span class="form-error-inline">{{ form.check_out_date.errors.0 }}</span>{% endif %}
+        </div>
+        <div class="form-group">
+          <label for="id_num_guests"><i class="fa-solid fa-user-friends"></i> Number of Guests</label>
+          {{ form.num_guests }}
+          {% if form.num_guests.errors %}<span class="form-error-inline">{{ form.num_guests.errors.0 }}</span>{% endif %}
+        </div>
+      {% else %}
+        {% for field in form.visible_fields %}
+          <div class="form-group">
+            {{ field.label_tag }} {{ field }}
+            {% if field.errors %}<span class="form-error-inline">{{ field.errors.0 }}</span>{% endif %}
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
     {% if total_nights and total_price %}
       <div class="form-summary">
-        <strong>Total Nights:</strong> {{ total_nights }}<br>
-        <strong>Total Price:</strong> ${{ total_price }}
+        <i class="fa-solid fa-moon"></i> <strong>Total Nights:</strong> {{ total_nights }}<br>
+        <i class="fa-solid fa-money-bill"></i> <strong>Total Price:</strong> ${{ total_price }}
       </div>
     {% endif %}
-    <button type="submit" class="btn submit">Book Now</button>
-    <a href="{% url 'booking-index' %}" class="btn secondary">Cancel</a>
+
+    <div class="form-actions">
+      <button type="submit" class="btn submit"><i class="fa-solid fa-check"></i> Book Now</button>
+      <a href="{% url 'booking-index' %}" class="btn secondary"><i class="fa-solid fa-times"></i> Cancel</a>
+    </div>
   </form>
+</div>
 {% endblock %}

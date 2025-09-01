@@ -4,7 +4,7 @@ h2 {
   color: var(--primary);
 }
 
-form {
+.booking-form {
   background: var(--secondary);
   max-width: 450px;
   margin: 0 auto;
@@ -13,13 +13,13 @@ form {
   box-shadow: var(--shadow);
 }
 
-form button, form a {
+.booking-form button, .booking-form a {
   margin-right: 1rem;
   margin-top: 1rem;
   text-decoration: none;
 }
 
-form a {
+.booking-form a {
   color: var(--danger);
   background: transparent;
   border: 1px solid var(--danger);
@@ -28,7 +28,7 @@ form a {
   transition: background 0.2s, color 0.2s;
 }
 
-form a:hover {
+.booking-form a:hover {
   background: var(--danger);
   color: #fff;
 }

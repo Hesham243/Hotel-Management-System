@@ -21,7 +21,11 @@
                         <p>No images available.</p>
                     {% endfor %}
                 </div>
-                <a href="{% url 'booking-create-for-room' room.id %}" class="btn submit room-detail-cta">Book this room</a>
+                                {% if available_today > 0 %}
+                                    <a href="{% url 'booking-create-for-room' room.id %}" class="btn submit room-detail-cta">Book this room</a>
+                                {% else %}
+                                    <button class="btn submit room-detail-cta" disabled>Fully Booked</button>
+                                {% endif %}
             </div>
         </section>
 {% endblock %}

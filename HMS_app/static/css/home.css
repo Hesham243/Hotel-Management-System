@@ -127,6 +127,8 @@ main > section {
   .logo-container {
     max-width: 520px;
   }
+}
+
 h1 {
   text-align: center;
   margin-bottom: 2rem;

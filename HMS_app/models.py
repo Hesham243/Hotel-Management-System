@@ -100,5 +100,3 @@ class Booking(models.Model):
         available = self.room.total - overlapping
       if available <= 0:
         raise ValidationError("All rooms of this type are fully booked for the selected dates.")
-  
-

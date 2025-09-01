@@ -1,86 +1,112 @@
-.page-header h1 {
-  margin-bottom: 1.2rem;
-  color: var(--primary);
-}
-
-.form-container, form {
-  background: var(--secondary);
-  padding: 2rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-form label {
-  display: block;
-  margin-bottom: 0.2rem;
-  font-weight: 500;
-}
-
-form input, form select, form textarea {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  background: #fff;
-  box-sizing: border-box;
-}
-
-form button, .btn.submit {
-  width: 100%;
-  margin-top: 0.5rem;
-}
-
-.red-text {
-  color: var(--danger);
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 0.5rem;
-}
-
-@media (max-width: 500px) {
-  .form-container, form {
-    padding: 1rem;
-  }
-}
-
 .center-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 70vh;
+  min-height: 75vh;
 }
 
-/* Center the page header */
 .page-header h1 {
   text-align: center;
   width: 100%;
-  margin-bottom: 1.2rem;
-  color: var(--primary);
+  margin-bottom: 1.5rem;
+  color: #2461a6;
 }
 
 .form-container {
-  background: var(--secondary);
+  background: #f7f7fa;
   padding: 2rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  max-width: 450px;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px #eaeaea;
+  max-width: 430px;
   margin: 0 auto;
   width: 100%;
 }
 
-/* Table form fields alignment */
 .form-container table {
-  margin: 0 auto;
+  width: 100%;
+}
+
+th {
+  text-align: right;
+  padding-right: 0.7em;
+  vertical-align: top;
+  font-size: 1.07em;
+  color: #2461a6;
+  font-weight: 600;
+  width: 36%;
+}
+
+td {
+  text-align: left;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+  width: 100%;
+  padding: 0.47rem;
+  border: 1.5px solid #b3c6e0;
+  border-radius: 6px;
+  font-size: 1em;
+  background: #fff;
+  margin-bottom: 0.2em;
+  transition: border 0.2s;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+  border: 1.5px solid #2461a6;
+  outline: none;
+}
+
+.form-help {
+  font-size: 0.96em;
+  color: #666;
+  margin: 0.1em 0 0.7em 0;
+  line-height: 1.48;
+}
+
+.form-help ul {
+  margin: 0 0 0 22px;
+  padding: 0;
+  color: #888;
+  font-size: 0.96em;
+}
+
+.form-errors {
+  color: #d9534f;
+  font-size: 1em;
+  margin: 6px 0 7px 0;
+  list-style: disc inside;
+  padding-left: 0;
+}
+
+.form-errors li {
+  margin-bottom: 0;
+}
+
+.btn.submit, button[type="submit"] {
+  width: 100%;
+  margin-top: 1.2em;
+  background: #2ea44f;
+  color: #fff;
+  border: 2px solid #2ea44f;
+  border-radius: 6px;
+  padding: 0.65em 0;
+  font-size: 1.12em;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 1px 8px rgba(46,164,79,0.07);
+  transition: background 0.18s, color 0.18s;
+}
+
+.btn.submit:hover, button[type="submit"]:hover {
+  background: #24913c;
+  color: #fff;
+}
+
+.red-text {
+  color: #d9534f;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 @media (max-width: 600px) {
@@ -88,156 +114,25 @@ table {
     padding: 1rem;
     max-width: 98vw;
   }
-}.summary-sep {
-	margin-left: 18px;
+  th {
+    font-size: 1em;
+    width: 32%;
+  }
 }
 
-.new-res-btn {
-	margin-left: auto;
-	float: right;
+input[type="date"] {
+  padding: 0.45em 0.75em;
+  border-radius: 6px;
+  border: 1.5px solid #b3c6e0;
+  font-size: 1em;
+  background: #fafcff;
+  color: #222;
+  margin-bottom: 0.7em;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border 0.2s;
 }
-
-.table-responsive {
-	width: 100%;
-	overflow-x: auto;
-	margin-bottom: 24px;
-}
-
-.booking-table-img {
-	width: 60px;
-	height: 40px;
-	object-fit: cover;
-	border-radius: 4px;
-}
-/* Booking Table and Status Badges */
-.table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-bottom: 24px;
-	background: #fff;
-	border-radius: 8px;
-	overflow: hidden;
-	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.table th, .table td {
-	padding: 10px 12px;
-	border-bottom: 1px solid #eee;
-	text-align: center;
-}
-.table th {
-	background: #f7f7f7;
-	font-weight: 700;
-}
-.table tr:last-child td {
-	border-bottom: none;
-}
-
-.status-badge {
-	display: inline-block;
-	padding: 4px 12px;
-	border-radius: 12px;
-	font-size: 0.95em;
-	font-weight: 600;
-	color: #fff;
-	background: #888;
-}
-.status-badge.confirmed {
-	background: #1a8000;
-}
-.status-badge.cancelled {
-	background: #b30000;
-}
-
-.booking-summary-bar {
-	font-size: 1.1em;
-	background: #f7f7f7;
-	border-radius: 8px;
-	padding: 10px 18px;
-	margin-bottom: 18px;
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-}
-.booking-summary-bar .btn {
-	margin-left: auto;
-}
-
-.booking-filter-bar {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	margin-bottom: 18px;
-}
-.booking-filter-bar input,
-.booking-filter-bar select {
-	padding: 6px 10px;
-	border-radius: 4px;
-	border: 1px solid #bbb;
-	font-size: 1em;
-}
-/* Booking Form and Message Styles */
-.form-section {
-	background: #f7f7f7;
-	border-radius: 8px;
-	padding: 14px 18px;
-	margin-bottom: 18px;
-}
-
-.form-warning {
-	background: #fff3cd;
-	border: 1px solid #ffeeba;
-}
-
-.form-error {
-	background: #ffeaea;
-	color: #b30000;
-	border-radius: 8px;
-	padding: 10px;
-	margin-bottom: 16px;
-	border: 1px solid #ffb3b3;
-}
-
-.form-error-inline {
-	color: #b30000;
-	font-size: 1.1em;
-	margin-left: 8px;
-}
-
-.form-summary {
-	margin: 16px 0;
-	padding: 10px;
-	background: #eafbe7;
-	border-radius: 8px;
-	border: 1px solid #b6e2c1;
-}
-
-.booking-form {
-	margin-top: 10px;
-}
-
-.btn {
-	font-size: 1.1em;
-	padding: 8px 18px;
-	border-radius: 6px;
-	border-width: 2px;
-	border-style: solid;
-	text-decoration: none;
-	background-color: #f5f5f5;
-	font-weight: 600;
-	cursor: pointer;
-	font-family: inherit;
-	margin-right: 10px;
-	margin-top: 10px;
-}
-.btn.submit {
-	color: #1a8000;
-	border-color: #1a8000;
-}
-.btn.secondary {
-	color: #555;
-	border-color: #bbb;
-}
-.btn.danger {
-	color: #b30000;
-	border-color: #b30000;
+input[type="date"]:focus {
+  border: 1.5px solid #2461a6;
+  outline: none;
 }

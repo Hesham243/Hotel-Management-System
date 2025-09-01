@@ -228,7 +228,7 @@ def complete_profile(request):
         form = ProfileForm(instance=request.user.customer)
         error_message = 'Invalid profile - try again'
     context = {'form': form, 'error_message': error_message}
-    return render(request, 'profile_form.html', context)
+    return render(request, 'registration/profile_form.html', context)
 
 
     

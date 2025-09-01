@@ -4,16 +4,21 @@
   href="{% static 'css/home.css' %}"
 />
 {% endblock %} {% block content %}
-    <h1> this is home page</h1>
+
+<section class="home-hero">
+    <h1>Welcome to the Hotel Management System</h1>
+    <p class="home-desc">Book, manage, and review your hotel stays with ease.</p>
     {% if not user.is_authenticated %}
-        <section>
-            <form action="{% url 'home' %}" method="post" class="login">
-            <h1>Login</h1>
-            {% csrf_token %} {{ form.as_p }}
-            <input type="hidden" name="next" value="{{ next }}" />
-            <button type="submit" class="btn submit">Login</button>
-            </form>
-        </section>
+        <div class="home-cta">
+            <a href="{% url 'login' %}" class="btn submit">Login</a>
+            <a href="{% url 'signup' %}" class="btn secondary">Sign Up</a>
+        </div>
+    {% else %}
+        <div class="home-cta">
+            <a href="{% url 'Rooms' %}" class="btn submit">Browse Rooms</a>
+            <a href="{% url 'booking-index' %}" class="btn secondary">My Bookings</a>
+        </div>
     {% endif %}
+</section>
 
 {% endblock %}

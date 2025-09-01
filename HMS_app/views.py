@@ -3,13 +3,14 @@ from django import forms
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
+from .models import Hotel,Room,Booking,Profile
+from .forms import BookingForm, ProfileForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Hotel, Room, Booking
-from .forms import BookingForm
+
 
 def home(request):
     if request.user.is_authenticated:
@@ -189,13 +190,26 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            Profile.objects.create(user=user)
             auth_login(request, user)
-            return redirect('home')
+            return redirect('complete-profile')
         else:
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'signup.html', context)
+
+def complete_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=request.user.customer)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ProfileForm(instance=request.user.customer)
+        error_message = 'Invalid profile - try again'
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'profile_form.html', context)
 
 
     

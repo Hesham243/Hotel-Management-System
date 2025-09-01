@@ -3,13 +3,16 @@ from django import forms
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
-from .models import Hotel,Room,Booking,Profile
+from .models import Hotel,Room,Booking,Profile,Services
 from .forms import BookingForm, ProfileForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+
+
 
 
 
@@ -27,6 +30,14 @@ def sign_in(request):
         form = AuthenticationForm()
     return render(request, 'registration/sign-in.html', {'form': form, 'next': request.GET.get('next', '')})
 
+def services(request):
+    services = Services.objects.all()
+    return render(request, 'services.html', {'services': services})
+
+
+def sevices_detail(request, service_id):
+    service = get_object_or_404(Services, id=service_id)
+    return render(request, 'service_detail.html', {'service': service})
 
 def home(request):
     if request.user.is_authenticated:
@@ -93,7 +104,7 @@ def booking_index(request):
 @login_required(login_url='sign-in')
 def booking_detail(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id, user=request.user)
-    return render(request, 'booking_detail.html', {'booking': booking})
+    return render(request, 'booking/booking_detail.html', {'booking': booking})
 
 
 
@@ -162,7 +173,7 @@ class BookingUpdateView(LoginRequiredMixin, UpdateView):
     login_url = 'sign-in'
     model = Booking
     form_class = BookingForm
-    template_name = 'booking_form.html'
+    template_name = 'booking/booking_form.html'
     success_url = reverse_lazy('booking-index')
 
     def get_queryset(self):
@@ -186,14 +197,12 @@ class BookingUpdateView(LoginRequiredMixin, UpdateView):
 class BookingDeleteView(LoginRequiredMixin, DeleteView):
     login_url = 'sign-in'
     model = Booking
-    template_name = 'booking_confirm_delete.html'
+    template_name = 'booking/booking_confirm_delete.html'
     success_url = reverse_lazy('booking-index')
 
     def get_queryset(self):
         return Booking.objects.filter(user=self.request.user)
 
-
-from django.contrib import messages
 
 class Home(LoginView):
     template_name = 'registration/login.html'
@@ -229,6 +238,43 @@ def complete_profile(request):
         error_message = 'Invalid profile - try again'
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/profile_form.html', context)
+
+
+class ProfileView(LoginRequiredMixin, forms.ModelForm):
+    login_url = 'sign-in'
+    model = Profile
+    form_class = ProfileForm
+    template_name = 'registration/profile.html'
+    success_url = reverse_lazy('profile')
+
+    def get_object(self):
+        return get_object_or_404(Profile, user=self.request.user)
+
+@login_required(login_url='sign-in')
+def profile(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'registration/profile.html', {'profile': profile, 'form': form})
+
+@login_required(login_url='sign-in')
+def edit_profile(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'registration/profile_form.html', {'form': form})
+
+
 
 
     

@@ -239,6 +239,7 @@ def complete_profile(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/profile_form.html', context)
 
+
 class ProfileView(LoginRequiredMixin, forms.ModelForm):
     login_url = 'sign-in'
     model = Profile
@@ -272,11 +273,6 @@ def edit_profile(request):
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'registration/profile_form.html', {'form': form})
-
-
-
-
-
 
 
 

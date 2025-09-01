@@ -5,25 +5,26 @@
 {% endblock %}
 
 {% block content %}
-    <section class="header">
-        <h1>All Rooms in the Hotel</h1>
-    </section>
-
-    <section class="card-container">
-        {% for room in rooms %}
-            <div class="card">
-                <a href="{% url 'room-detail' room.obj.id %}">
-                    {% if room.obj.images.exists %}
-                        <img src="{{ room.obj.images.first.image_url }}" alt="room">
-                    {% else %}
-                        <img src="{% static 'path/to/default/image.jpg' %}" alt="Default room image">
-                    {% endif %}
-                    <h2 class="card-type">{{ room.obj.type }}</h2>
-                    <p class="card-max">Max Occupancy: {{ room.obj.max_occupancy }}</p>
-                    <p class="card-available"><strong>Available:</strong> {{ room.available }}</p>
-                </a>
-            </div>
-        {% endfor %}
-    </section>
+  <section class="header">
+    <h1>All Rooms in the Hotel</h1>
+  </section>
+  <section class="room-list-container">
+    {% for room in rooms %}
+      <div class="room-row-card">
+        <div class="room-image-cell">
+          {% if room.obj.images.exists %}
+            <img src="{{ room.obj.images.first.image_url }}" alt="room">
+          {% else %}
+            <img src="{% static 'path/to/default/image.jpg' %}" alt="Default room image">
+          {% endif %}
+        </div>
+        <div class="room-info-cell">
+          <h2>{{ room.obj.type }}</h2>
+          <div class="room-max"><strong>Max Occupancy:</strong> {{ room.obj.max_occupancy }}</div>
+          <div class="room-available"><strong>Available:</strong> {{ room.available }}</div>
+          <a href="{% url 'room-detail' room.obj.id %}" class="see-rooms-btn">See Details</a>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
 {% endblock %}
-

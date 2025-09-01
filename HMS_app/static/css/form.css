@@ -51,3 +51,41 @@ table {
     padding: 1rem;
   }
 }
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+
+/* Center the page header */
+.page-header h1 {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1.2rem;
+  color: var(--primary);
+}
+
+.form-container {
+  background: var(--secondary);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 450px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Table form fields alignment */
+.form-container table {
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .form-container {
+    padding: 1rem;
+    max-width: 98vw;
+  }
+}

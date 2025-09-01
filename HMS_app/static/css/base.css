@@ -56,6 +56,9 @@ nav a, nav button {
   padding: 0.5rem 0.75rem;
   border-radius: var(--radius);
 }
+img{
+  color: white;
+}
 
 nav a:hover, nav button:hover {
   background: rgba(255,255,255,0.12);

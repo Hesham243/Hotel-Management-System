@@ -25,7 +25,7 @@ def sign_in(request):
             return redirect('home')
     else:
         form = AuthenticationForm()
-    return render(request, 'sign-in.html', {'form': form, 'next': request.GET.get('next', '')})
+    return render(request, 'registration/sign-in.html', {'form': form, 'next': request.GET.get('next', '')})
 
 
 def home(request):
@@ -44,7 +44,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-@login_required
+@login_required(login_url='sign-in')
 def rooms(request):
     today = datetime.date.today()
     rooms = Room.objects.prefetch_related('images').all()
@@ -59,14 +59,14 @@ def rooms(request):
         })
     return render(request, 'room/index.html', {"rooms": room_list})
 
-@login_required
+@login_required(login_url='sign-in')
 def room_detail(request, room_id):
     room = get_object_or_404(Room, id=room_id)
     images = room.images.all()
     return render (request, 'room/detail.html', {'room':room, 'images':images})
     
 
-@login_required
+@login_required(login_url='sign-in')
 def booking_index(request):
     cancelled = False
     # Handle cancellation
@@ -90,7 +90,7 @@ def booking_index(request):
         'cancelled_count': cancelled_count,
     })
 
-@login_required
+@login_required(login_url='sign-in')
 def booking_detail(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id, user=request.user)
     return render(request, 'booking_detail.html', {'booking': booking})
@@ -101,6 +101,7 @@ def booking_detail(request, booking_id):
 # CBV for Booking Create
 
 class BookingCreateView(LoginRequiredMixin, CreateView):
+    login_url = 'sign-in'
     model = Booking
     form_class = BookingForm
     template_name = 'booking/booking_form.html'
@@ -158,6 +159,7 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 # CBV for Booking Update
 
 class BookingUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = 'sign-in'
     model = Booking
     form_class = BookingForm
     template_name = 'booking_form.html'
@@ -182,6 +184,7 @@ class BookingUpdateView(LoginRequiredMixin, UpdateView):
 # CBV for Booking Delete
 
 class BookingDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = 'sign-in'
     model = Booking
     template_name = 'booking_confirm_delete.html'
     success_url = reverse_lazy('booking-index')
@@ -213,7 +216,7 @@ def signup(request):
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
-    return render(request, 'signup.html', context)
+    return render(request, 'registration/signup.html', context)
 
 def complete_profile(request):
     if request.method == 'POST':

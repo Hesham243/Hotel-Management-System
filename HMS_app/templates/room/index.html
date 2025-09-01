@@ -5,23 +5,25 @@
 {% endblock %}
 
 {% block content %}
-    <section class='header'>
+    <section class="header">
         <h1>All Rooms in the Hotel</h1>
     </section>
 
     <section class="card-container">
         {% for room in rooms %}
             <div class="card">
-                <a href="{% url 'room-detail' room.id %}">
-                    {% if room.images.all %}
-                        <img src="{{ room.images.first.image_url }}" alt="room">
+                <a href="{% url 'room-detail' room.obj.id %}">
+                    {% if room.obj.images.exists %}
+                        <img src="{{ room.obj.images.first.image_url }}" alt="room">
                     {% else %}
                         <img src="{% static 'path/to/default/image.jpg' %}" alt="Default room image">
                     {% endif %}
-                    <h2 class="card-type">{{ room.type }}</h2>
-                    <h2 class="card-max">Max Occupancy: {{ room.max_occupancy }}</h2>
+                    <h2 class="card-type">{{ room.obj.type }}</h2>
+                    <p class="card-max">Max Occupancy: {{ room.obj.max_occupancy }}</p>
+                    <p class="card-available"><strong>Available:</strong> {{ room.available }}</p>
                 </a>
             </div>
         {% endfor %}
     </section>
 {% endblock %}
+

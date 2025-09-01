@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{% if form.instance.pk %}Edit Booking{% else %}Create Booking{% endif %}</h2>
+  {% if form.non_field_errors %}
+    <div class="form-error">
+      {% for error in form.non_field_errors %}
+        <div>{{ error }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if room_obj %}
+    <section class="form-section">
+      <strong>Room:</strong> {{ room_obj.type }}<br>
+      <strong>Hotel:</strong> {{ room_obj.hotel.name }}<br>
+      <strong>Price per Night:</strong> ${{ room_obj.price }}<br>
+      <strong>Max Occupancy:</strong> {{ room_obj.max_occupancy }}
+    </section>
+  {% endif %}
+  {% if room_obj and room_obj.bookings.exists %}
+    <section class="form-section form-warning">
+      <strong>Unavailable Dates for this Room:</strong>
+      <ul>
+        {% for b in room_obj.bookings.all %}
+          {% if b.status == 'confirmed' %}
+            <li>{{ b.check_in_date }} to {{ b.check_out_date }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <small>Please avoid selecting these dates.</small>
+    </section>
+  {% endif %}
+  <form method="post" class="booking-form">
+    {% csrf_token %}
+    {% if form.room.value %}
+      {{ form.room }}
+      {{ form.check_in_date.label_tag }} {{ form.check_in_date }}
+      {% if form.check_in_date.errors %}<span class="form-error-inline">{{ form.check_in_date.errors.0 }}</span>{% endif %}<br>
+      {{ form.check_out_date.label_tag }} {{ form.check_out_date }}
+      {% if form.check_out_date.errors %}<span class="form-error-inline">{{ form.check_out_date.errors.0 }}</span>{% endif %}<br>
+      {{ form.num_guests.label_tag }} {{ form.num_guests }}
+      {% if form.num_guests.errors %}<span class="form-error-inline">{{ form.num_guests.errors.0 }}</span>{% endif %}<br>
+    {% else %}
+      {{ form.as_p }}
+    {% endif %}
+    {% if total_nights and total_price %}
+      <div class="form-summary">
+        <strong>Total Nights:</strong> {{ total_nights }}<br>
+        <strong>Total Price:</strong> ${{ total_price }}
+      </div>
+    {% endif %}
+    <button type="submit" class="btn submit">Book Now</button>
+    <a href="{% url 'booking-index' %}" class="btn secondary">Cancel</a>
+  </form>
+{% endblock %}

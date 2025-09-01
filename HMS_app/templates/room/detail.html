@@ -5,21 +5,23 @@
 {% endblock %}
 
 {% block content %}
-  <section class='header'>
-    <h1>{{room.type}}</h1>
-  </section>
-  <section class="card-container">
-    <div class="card">
-      <h2 class="card-price">${{ room.price }}</h2>
-      <h2 class="card-max">Max Occupancy: {{ room.max_occupancy }}</h2>
-      <h3>Images:</h3>
-      <div class="image-gallery">
-        {% for image in images %}
-          <img src="{{ image.image_url }}" alt="Room Image" class="room-image" style="max-width: 300px; max-height: 200px; margin: 5px;">
-        {% empty %}
-          <p>No images available.</p>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
+    <section class='header'>
+        <h1>{{room.type}}</h1>
+    </section>
+    <section class="card-container">
+        <div class="card">
+            <h2 class="card-price">${{ room.price }}</h2>
+            <h2 class="card-max">Max Occupancy: {{ room.max_occupancy }}</h2>
+
+            <h3>Images:</h3>
+            <div class="image-gallery">
+                {% for image in images %}
+                    <img src="{{ image.image_url }}" alt="Room Image" class="room-image">
+                {% empty %}
+                    <p>No images available.</p>
+                {% endfor %}
+            </div>
+            <a href="{% url 'booking-create-for-room' room.id %}" class="btn submit">Book this room</a>
+        </div>
+    </section>
 {% endblock %}

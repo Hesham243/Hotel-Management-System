@@ -4,14 +4,14 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 
 
-# class Customer(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='customer')
-#     full_name = models.CharField(max_length=255)
-#     email = models.EmailField(unique=True)
-#     phone_number = models.CharField(max_length=15, blank=True, null=True)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='customer')
+    full_name = models.CharField(max_length=255)
+    email = models.EmailField(unique=True)
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
 
-#     def __str__(self):
-#       return self.full_name
+    def __str__(self):
+      return self.full_name
 
 class Hotel(models.Model):
     name = models.CharField(max_length=255)
@@ -32,15 +32,23 @@ class Hotel(models.Model):
     
     
 class Room(models.Model):
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="rooms")
-    type = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.CharField(max_length=20, choices=[("available", "Available"), ("booked", "Booked")])
-    max_occupancy = models.IntegerField()
-    total = models.IntegerField()
+  hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="rooms")
+  type = models.CharField(max_length=100)
+  price = models.DecimalField(max_digits=10, decimal_places=2)
+  status = models.CharField(max_length=20, choices=[("available", "Available"), ("booked", "Booked")])
+  max_occupancy = models.IntegerField()
+  total = models.IntegerField()
 
-    def __str__(self):
-      return f"{self.type} - {self.hotel.name}"
+  def get_available_count(self, check_in, check_out):
+    overlapping = self.bookings.filter(
+      status='confirmed',
+      check_in_date__lt=check_out,
+      check_out_date__gt=check_in
+    ).count()
+    return self.total - overlapping
+
+  def __str__(self):
+    return f"{self.type} - {self.hotel.name}"
 
 
 class RoomNumber(models.Model):
@@ -59,8 +67,9 @@ class RoomImage(models.Model):
       return f"Image for {self.room.type} - {self.image_url}"
 
 
+
 class Booking(models.Model):
-  # customer= models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="bookings", null=True)
+  user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name="bookings")
   room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="bookings")
   check_in_date = models.DateField()
   check_out_date = models.DateField()
@@ -74,9 +83,22 @@ class Booking(models.Model):
     return f"Booking {self.id} "
   
   def clean(self):
-    """Custom validation: check_in must be before check_out."""
+    """Custom validation: check_in must be before check_out and no overbooking."""
     from django.core.exceptions import ValidationError
     if self.check_in_date >= self.check_out_date:
-        raise ValidationError("Check-in date must be before check-out date.")
+      raise ValidationError("Check-in date must be before check-out date.")
+    # Overbooking check
+    if self.room and self.check_in_date and self.check_out_date:
+      available = self.room.get_available_count(self.check_in_date, self.check_out_date)
+      # If updating an existing booking, exclude itself
+      if self.pk:
+        overlapping = self.room.bookings.filter(
+          status='confirmed',
+          check_in_date__lt=self.check_out_date,
+          check_out_date__gt=self.check_in_date
+        ).exclude(pk=self.pk).count()
+        available = self.room.total - overlapping
+      if available <= 0:
+        raise ValidationError("All rooms of this type are fully booked for the selected dates.")
   
 

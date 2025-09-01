@@ -63,7 +63,7 @@ def rooms(request):
     for room in rooms:
         # Count confirmed bookings for this room for today or future
         booked_count = room.bookings.filter(status='confirmed', check_out_date__gt=today).count()
-        available = room.total - booked_count
+        available = max(0, room.total - booked_count)
         room_list.append({
             'obj': room,
             'available': available
@@ -74,7 +74,9 @@ def rooms(request):
 def room_detail(request, room_id):
     room = get_object_or_404(Room, id=room_id)
     images = room.images.all()
-    return render (request, 'room/detail.html', {'room':room, 'images':images})
+    today = datetime.date.today()
+    available_today = max(0, room.total - room.bookings.filter(status='confirmed', check_out_date__gt=today).count())
+    return render (request, 'room/detail.html', {'room':room, 'images':images, 'available_today': available_today})
     
 
 @login_required(login_url='sign-in')
@@ -89,7 +91,7 @@ def booking_index(request):
                 booking.status = 'cancelled'
                 booking.save()
                 cancelled = True
-    bookings = Booking.objects.filter(user=request.user)
+    bookings = Booking.objects.filter(user=request.user).order_by('-created_at')
     total_count = bookings.count()
     confirmed_count = bookings.filter(status='confirmed').count()
     cancelled_count = bookings.filter(status='cancelled').count()

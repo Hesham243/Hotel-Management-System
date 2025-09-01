@@ -252,7 +252,7 @@ class ProfileView(LoginRequiredMixin, forms.ModelForm):
 
 @login_required(login_url='sign-in')
 def profile(request):
-    profile = get_object_or_404(Profile, user=request.user)
+    profile, created = Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():

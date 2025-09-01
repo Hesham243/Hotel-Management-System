@@ -75,7 +75,9 @@ WSGI_APPLICATION = 'hotelcollecter.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hotelcollector'
+        'NAME': 'hotelcollector',
+        'USER': 'Hesham',
+        'PASSWORD': '123'
     }
 }
 

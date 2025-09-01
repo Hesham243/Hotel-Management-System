@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 {% block head %}
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/booking_confirm_delete.css' %}">
+  <link rel="stylesheet" href="{% static 'css/booking_form.css' %}">
 {% endblock %}
 
 {% block content %}
-  <h2>Delete Booking</h2>
-  <p>Are you sure you want to delete this booking?</p>
+  <h2>{% if form.instance.pk %}Edit Booking{% else %}Create Booking{% endif %}</h2>
   <form method="post">
     {% csrf_token %}
-    <button type="submit">Yes, delete</button>
+    {{ form.as_p }}
+    <button type="submit">Save</button>
     <a href="{% url 'booking-index' %}">Cancel</a>
   </form>
+  
 {% endblock %}

@@ -66,7 +66,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'hotelcollecter.wsgi.application'
 
 
@@ -76,9 +75,7 @@ WSGI_APPLICATION = 'hotelcollecter.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hotelcollector',
-        'USER': 'Hesham',
-        'PASSWORD': '123'
+        'NAME': 'hotelcollector'
     }
 }
 

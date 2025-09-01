@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/bookings.css' %}">
+{% endblock %}
+
 {% block content %}
   <h2>Your Bookings</h2>
   {% if cancelled %}

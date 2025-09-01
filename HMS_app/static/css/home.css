@@ -128,3 +128,9 @@ main > section {
     max-width: 520px;
   }
 }
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary);
+}

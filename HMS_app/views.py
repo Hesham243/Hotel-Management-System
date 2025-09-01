@@ -12,6 +12,22 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+
+# Sign-in view for login
+def sign_in(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            auth_login(request, user)
+            return redirect('home')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'sign-in.html', {'form': form, 'next': request.GET.get('next', '')})
+
+
 def home(request):
     if request.user.is_authenticated:
         return render(request, 'home.html')

@@ -9,6 +9,7 @@ urlpatterns = [
     path("rooms/<int:room_id>", views.room_detail, name="room-detail"),
     path('bookings/', views.booking_index, name='booking-index'),
     path('bookings/<int:booking_id>/', views.booking_detail, name='booking-detail'),
+    path('bookings/<int:booking_id>/pdf/', views.booking_pdf, name='booking-pdf'),
     path('bookings/create/<int:room_id>/', views.BookingCreateView.as_view(), name='booking-create-for-room'),
     path('bookings/<int:pk>/edit/', views.BookingUpdateView.as_view(), name='booking-update'),
     path('bookings/<int:pk>/delete/', views.BookingDeleteView.as_view(), name='booking-delete'),

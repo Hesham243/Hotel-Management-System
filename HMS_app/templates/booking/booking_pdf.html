@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Booking {{ booking.id }}</title>
+  <style>
+    body { font-family: DejaVu Sans, Arial, sans-serif; font-size: 12px; }
+    h1 { font-size: 18px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <h1>Booking Confirmation</h1>
+  <table>
+    {# Customer info first #}
+    <tr>
+      <th>Customer Name</th>
+      <td>
+        {% if customer %}
+          {{ customer.full_name|default:booking.user.username }}
+        {% else %}
+          {{ booking.user.get_full_name|default:booking.user.username }}
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <th>Customer Email</th>
+      <td>
+        {% if customer %}
+          {{ customer.email|default:booking.user.email }}
+        {% else %}
+          {{ booking.user.email }}
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <th>Customer Phone</th>
+      <td>
+        {% if customer %}
+          {{ customer.phone_number|default:"-" }}
+        {% else %}
+          -
+        {% endif %}
+      </td>
+    </tr>
+
+    {# Booking info #}
+    <tr><th>Booking ID</th><td>{{ booking.id }}</td></tr>
+    <tr><th>Room</th><td>{{ booking.room }}</td></tr>
+    <tr><th>Check-in</th><td>{{ booking.check_in_date }}</td></tr>
+    <tr><th>Check-out</th><td>{{ booking.check_out_date }}</td></tr>
+    <tr><th>Status</th><td>{{ booking.status }}</td></tr>
+    <tr><th>Guests</th><td>{{ booking.num_guests }}</td></tr>
+    <tr><th>Total</th><td>{{ booking.total_amount }} {{ booking.currency }}</td></tr>
+    <tr><th>Created</th><td>{{ booking.created_at }}</td></tr>
+  </table>
+</body>
+</html>

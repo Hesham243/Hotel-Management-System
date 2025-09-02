@@ -13,6 +13,9 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.template.loader import get_template
+from django.http import HttpResponse
+from xhtml2pdf import pisa
 
 
 
@@ -134,7 +137,19 @@ def booking_index(request):
 @login_required(login_url='sign-in')
 def booking_detail(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id, user=request.user)
-    return render(request, 'booking/booking_detail.html', {'booking': booking})
+    customer = getattr(request.user, 'customer', None)
+    return render(request, 'booking/booking_detail.html', {'booking': booking, 'customer': customer})
+
+@login_required(login_url='sign-in')
+def booking_pdf(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id, user=request.user)
+    template = get_template('booking/booking_pdf.html')
+    customer = getattr(request.user, 'customer', None)
+    html = template.render({'booking': booking, 'customer': customer})
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="booking_{booking.id}.pdf"'
+    pisa.CreatePDF(src=html, dest=response)
+    return response
 
 
 

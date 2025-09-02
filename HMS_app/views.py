@@ -35,7 +35,7 @@ def services(request):
     return render(request, 'services.html', {'services': services})
 
 
-def sevices_detail(request, service_id):
+def service_detail(request, service_id):
     service = get_object_or_404(Services, id=service_id)
     return render(request, 'service_detail.html', {'service': service})
 
@@ -76,7 +76,17 @@ def room_detail(request, room_id):
     images = room.images.all()
     today = datetime.date.today()
     available_today = max(0, room.total - room.bookings.filter(status='confirmed', check_out_date__gt=today).count())
-    return render (request, 'room/detail.html', {'room':room, 'images':images, 'available_today': available_today})
+    # Inline booking form for this room (hidden room field via initial)
+    booking_form = BookingForm(initial={'room': room.id})
+    # Services for this room's hotel (if any)
+    hotel_services = Services.objects.filter(hotel=room.hotel)
+    return render (request, 'room/detail.html', {
+        'room': room,
+        'images': images,
+        'available_today': available_today,
+        'booking_form': booking_form,
+        'services': hotel_services,
+    })
     
 
 @login_required(login_url='sign-in')
@@ -117,8 +127,15 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
     login_url = 'sign-in'
     model = Booking
     form_class = BookingForm
-    template_name = 'booking/booking_form.html'
+    template_name = 'room/detail.html'  # not used for room-specific GET; POST invalid falls back here
     success_url = reverse_lazy('booking-index')
+
+    def get(self, request, *args, **kwargs):
+        # If a room_id is provided, render the inline form on the room detail page instead
+        room_id = self.kwargs.get('room_id')
+        if room_id:
+            return redirect('room-detail', room_id=room_id)
+        return super().get(request, *args, **kwargs)
 
 
     def get_initial(self):
@@ -157,6 +174,11 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.instance.status = 'confirmed'
+        # Ensure room is set when posting from the room-specific URL
+        if not getattr(form.instance, 'room_id', None):
+            room_id = self.kwargs.get('room_id')
+            if room_id:
+                form.instance.room_id = room_id
         nights = (form.instance.check_out_date - form.instance.check_in_date).days
         form.instance.total_amount = nights * form.instance.room.price
         try:
@@ -165,6 +187,25 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
             form.add_error(None, str(e))
             return self.form_invalid(form)
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        """When posting from a room-specific page, re-render that page with errors."""
+        room_id = self.kwargs.get('room_id')
+        if room_id:
+            room = get_object_or_404(Room, id=room_id)
+            images = room.images.all()
+            today = datetime.date.today()
+            available_today = max(0, room.total - room.bookings.filter(status='confirmed', check_out_date__gt=today).count())
+            hotel_services = Services.objects.filter(hotel=room.hotel)
+            context = {
+                'room': room,
+                'images': images,
+                'available_today': available_today,
+                'booking_form': form,
+                'services': hotel_services,
+            }
+            return render(self.request, 'room/detail.html', context)
+        return super().form_invalid(form)
 
 
 
@@ -206,13 +247,6 @@ class BookingDeleteView(LoginRequiredMixin, DeleteView):
         return Booking.objects.filter(user=self.request.user)
 
 
-class Home(LoginView):
-    template_name = 'registration/login.html'
-
-    def get(self, request, *args, **kwargs):
-        if 'next' in request.GET:
-            messages.info(request, 'Please log in to access this page.')
-        return super().get(request, *args, **kwargs)
     
 def signup(request):
     error_message = ''
@@ -242,15 +276,6 @@ def complete_profile(request):
     return render(request, 'registration/profile_form.html', context)
 
 
-class ProfileView(LoginRequiredMixin, forms.ModelForm):
-    login_url = 'sign-in'
-    model = Profile
-    form_class = ProfileForm
-    template_name = 'registration/profile.html'
-    success_url = reverse_lazy('profile')
-
-    def get_object(self):
-        return get_object_or_404(Profile, user=self.request.user)
 
 @login_required(login_url='sign-in')
 def profile(request):

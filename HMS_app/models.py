@@ -85,8 +85,15 @@ class Booking(models.Model):
   def clean(self):
     """Custom validation: check_in must be before check_out, no overbooking, and guests <= max occupancy."""
     from django.core.exceptions import ValidationError
-    if self.check_in_date >= self.check_out_date:
+    # Date ordering
+    if self.check_in_date and self.check_out_date and self.check_in_date >= self.check_out_date:
       raise ValidationError("Check-in date must be before check-out date.")
+    # No past dates
+    today = timezone.now().date()
+    if self.check_in_date and self.check_in_date < today:
+      raise ValidationError("Check-in date cannot be in the past.")
+    if self.check_out_date and self.check_out_date < today:
+      raise ValidationError("Check-out date cannot be in the past.")
     # Overbooking check
     if self.room and self.check_in_date and self.check_out_date:
       available = self.room.get_available_count(self.check_in_date, self.check_out_date)
@@ -101,8 +108,10 @@ class Booking(models.Model):
       if available <= 0:
         raise ValidationError("All rooms of this type are fully booked for the selected dates.")
     # Max occupancy check
-    if self.room and self.num_guests:
-      if self.num_guests > self.room.max_occupancy:
+    if self.num_guests is not None:
+      if self.num_guests < 1:
+        raise ValidationError("Number of guests must be at least 1.")
+      if self.room and self.num_guests > self.room.max_occupancy:
         raise ValidationError(f"Number of guests ({self.num_guests}) exceeds the maximum occupancy ({self.room.max_occupancy}) for this room.")
   
   

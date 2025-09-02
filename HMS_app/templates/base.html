@@ -16,9 +16,11 @@
         <ul>
           <li><a href="{% url 'home' %}">Home</a></li>
           <li><a href="{% url 'Rooms' %}">Rooms</a></li>
+          <li><a href="{% url 'services' %}">Services</a></li>
           <li><a href="{% url 'booking-index' %}">Bookings</a></li>
           <li><a href="{% url 'About' %}">About</a></li>
           {% if user.is_authenticated %}
+            <li><a href="{% url 'profile' %}">Profile</a></li>
             <li>
               <form id="logout-form" method="post" action="{% url 'logout' %}" style="display:inline;">
                 {% csrf_token %}

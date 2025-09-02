@@ -9,7 +9,6 @@ urlpatterns = [
     path("rooms/<int:room_id>", views.room_detail, name="room-detail"),
     path('bookings/', views.booking_index, name='booking-index'),
     path('bookings/<int:booking_id>/', views.booking_detail, name='booking-detail'),
-    path('bookings/create/', views.BookingCreateView.as_view(), name='booking-create'),
     path('bookings/create/<int:room_id>/', views.BookingCreateView.as_view(), name='booking-create-for-room'),
     path('bookings/<int:pk>/edit/', views.BookingUpdateView.as_view(), name='booking-update'),
     path('bookings/<int:pk>/delete/', views.BookingDeleteView.as_view(), name='booking-delete'),
@@ -19,7 +18,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('profile/edit/', views.edit_profile, name='edit-profile'),
     path('services/', views.services, name='services'),
-    path('services/<int:service_id>/', views.sevices_detail, name='service-detail'),
+    path('services/<int:service_id>/', views.service_detail, name='service-detail'),
     
 ]
 

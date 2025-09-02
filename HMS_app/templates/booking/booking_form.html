@@ -19,47 +19,26 @@
     </div>
   {% endif %}
 
-  {% if room_obj %}
+  {% if form.instance.room %}
     <section class="room-summary">
       <div class="room-info">
-        <i class="fa-solid fa-hotel"></i> <strong>Hotel:</strong> {{ room_obj.hotel.name }}<br>
-        <i class="fa-solid fa-door-closed"></i> <strong>Room Type:</strong> {{ room_obj.type }}<br>
-        <i class="fa-solid fa-users"></i> <strong>Max Occupancy:</strong> {{ room_obj.max_occupancy }}<br>
-        <i class="fa-solid fa-dollar-sign"></i> <strong>Price/Night:</strong> ${{ room_obj.price }}
+        <i class="fa-solid fa-hotel"></i> <strong>Hotel:</strong> {{ form.instance.room.hotel.name }}<br>
+        <i class="fa-solid fa-door-closed"></i> <strong>Room Type:</strong> {{ form.instance.room.type }}<br>
+        <i class="fa-solid fa-users"></i> <strong>Max Occupancy:</strong> {{ form.instance.room.max_occupancy }}<br>
+        <i class="fa-solid fa-dollar-sign"></i> <strong>Price/Night:</strong> ${{ form.instance.room.price }}
       </div>
     </section>
   {% endif %}
 
-
-
   <form method="post" class="booking-form">
     {% csrf_token %}
     <div class="form-fields">
-      {% if form.room.value %}
-        {{ form.room }}
+      {% for field in form.visible_fields %}
         <div class="form-group">
-          <label for="id_check_in_date"><i class="fa-solid fa-calendar-check"></i> Check-in Date</label>
-          {{ form.check_in_date }}
-          {% if form.check_in_date.errors %}<span class="form-error-inline">{{ form.check_in_date.errors.0 }}</span>{% endif %}
+          {{ field.label_tag }} {{ field }}
+          {% if field.errors %}<span class="form-error-inline">{{ field.errors.0 }}</span>{% endif %}
         </div>
-        <div class="form-group">
-          <label for="id_check_out_date"><i class="fa-solid fa-calendar-day"></i> Check-out Date</label>
-          {{ form.check_out_date }}
-          {% if form.check_out_date.errors %}<span class="form-error-inline">{{ form.check_out_date.errors.0 }}</span>{% endif %}
-        </div>
-        <div class="form-group">
-          <label for="id_num_guests"><i class="fa-solid fa-user-friends"></i> Number of Guests</label>
-          {{ form.num_guests }}
-          {% if form.num_guests.errors %}<span class="form-error-inline">{{ form.num_guests.errors.0 }}</span>{% endif %}
-        </div>
-      {% else %}
-        {% for field in form.visible_fields %}
-          <div class="form-group">
-            {{ field.label_tag }} {{ field }}
-            {% if field.errors %}<span class="form-error-inline">{{ field.errors.0 }}</span>{% endif %}
-          </div>
-        {% endfor %}
-      {% endif %}
+      {% endfor %}
     </div>
 
     {% if total_nights and total_price %}
@@ -70,7 +49,7 @@
     {% endif %}
 
     <div class="form-actions">
-      <button type="submit" class="btn submit"><i class="fa-solid fa-check"></i> Book Now</button>
+      <button type="submit" class="btn submit"><i class="fa-solid fa-check"></i> Save</button>
       <a href="{% url 'booking-index' %}" class="btn secondary"><i class="fa-solid fa-times"></i> Cancel</a>
     </div>
   </form>

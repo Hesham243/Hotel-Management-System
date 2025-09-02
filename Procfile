@@ -1,1 +1,1 @@
-web: gunicorn <hotelcollecter>.wsgi
+web: gunicorn hotelcollecter.wsgi

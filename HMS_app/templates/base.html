@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="shortcut icon" type="image/png" href="" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>Hotel</title>
     {% block head %}{% endblock %}
   </head>
@@ -72,7 +73,7 @@
           <ul class="footer-links">
             <li><a href="#">Policies</a></li>
             <li><a href="#">Terms And Conditions</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="{% url "About" %}">About Us</a></li>
           </ul>
         </div>
       </div>

@@ -12,16 +12,22 @@
     <section class="room-detail-main two-col">
         <div class="left-col">
             <div class="room-detail-card">
+                <div class="room-detail-slider">
+                    <div class="slider-track">
+                        {% for image in images %}
+                            <div class="slide">
+                                <img src="{{ image.image_url }}" alt="Room Image" class="room-detail-image">
+                            </div>
+                        {% empty %}
+                            <p>No images available.</p>
+                        {% endfor %}
+                    </div>
+                    <button class="slider-btn prev">‹</button>
+                    <button class="slider-btn next">›</button>
+                </div>
                 <div class="room-detail-info">
                     <div class="room-detail-price">${{ room.price }} <span class="per-night">/ night</span></div>
                     <div class="room-detail-occupancy">Max Occupancy: <strong>{{ room.max_occupancy }}</strong></div>
-                </div>
-                <div class="room-detail-gallery">
-                    {% for image in images %}
-                        <img src="{{ image.image_url }}" alt="Room Image" class="room-detail-image">
-                    {% empty %}
-                        <p>No images available.</p>
-                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -95,4 +101,28 @@
             {% endfor %}
         </div>
     </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        const track = document.querySelector(".slider-track");
+        const slides = document.querySelectorAll(".slide");
+        const prevBtn = document.querySelector(".slider-btn.prev");
+        const nextBtn = document.querySelector(".slider-btn.next");
+
+        let index = 0;
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        prevBtn.addEventListener("click", () => {
+            index = (index - 1 + slides.length) % slides.length;
+            updateSlider();
+        });
+
+        nextBtn.addEventListener("click", () => {
+            index = (index + 1) % slides.length;
+            updateSlider();
+        });
+        });
+    </script>
 {% endblock %}

@@ -20,7 +20,6 @@ from xhtml2pdf import pisa
 
 
 
-
 # Sign-in view for login
 def sign_in(request):
     if request.user.is_authenticated:

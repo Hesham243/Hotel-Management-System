@@ -1,6 +1,8 @@
 /* Home Hero Section Styles */
 .hero {
-  padding: 60px 0;
+  width: 100%;
+  height: 100vh;
+  background: url('https://cdn.britannica.com/96/115096-050-5AFDAF5D/Bellagio-Hotel-Casino-Las-Vegas.jpg') no-repeat center center/cover;
   text-align: center;
   position: relative;
 }
@@ -31,15 +33,7 @@
   margin: 0 auto 30px;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
-.home-hero-img {
-  width: 33%;
-  max-width: 400px;
-  margin: 0 auto 2rem auto;
-  display: block;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  border: 5px solid white;
-}
+
 .header-logo-container {
   display: none;
 }

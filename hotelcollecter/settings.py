@@ -14,7 +14,6 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 import dj_database_url
-
 load_dotenv()
 
 
@@ -97,6 +96,7 @@ else:
             'NAME': 'hotelcollector',
             # 'USER': 'Hesham',
             # 'PASSWORD': '123'
+            # The value of 'NAME' should match the value of 'NAME' you replaced.
         }
     }
 
@@ -145,6 +145,7 @@ LOGOUT_REDIRECT_URL = 'home'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 # Third-party API keys
 # Set GOOGLE_MAPS_API_KEY in your environment for local/dev. Do not hardcode secrets.

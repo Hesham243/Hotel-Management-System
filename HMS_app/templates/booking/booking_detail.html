@@ -7,7 +7,40 @@
 {% block content %}
   <h2>Booking Details</h2>
   <table>
-    <tr><th>ID</th><td>{{ booking.id }}</td></tr>
+    {# Customer information first #}
+    <tr>
+      <th>Customer Name</th>
+      <td>
+        {% if customer %}
+          {{ customer.full_name|default:request.user.username }}
+        {% else %}
+          {{ request.user.get_full_name|default:request.user.username }}
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <th>Customer Email</th>
+      <td>
+        {% if customer %}
+          {{ customer.email|default:request.user.email }}
+        {% else %}
+          {{ request.user.email }}
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <th>Customer Phone</th>
+      <td>
+        {% if customer %}
+          {{ customer.phone_number|default:"-" }}
+        {% else %}
+          -
+        {% endif %}
+      </td>
+    </tr>
+
+    {# Booking details next #}
+    <tr><th>Booking ID</th><td>{{ booking.id }}</td></tr>
     <tr><th>Room</th><td>{{ booking.room }}</td></tr>
     <tr><th>Check-in Date</th><td>{{ booking.check_in_date }}</td></tr>
     <tr><th>Check-out Date</th><td>{{ booking.check_out_date }}</td></tr>
@@ -16,7 +49,9 @@
     <tr><th>Total Amount</th><td>{{ booking.total_amount }} {{ booking.currency }}</td></tr>
     <tr><th>Created At</th><td>{{ booking.created_at }}</td></tr>
   </table>
+
   <a href="{% url 'booking-update' booking.id %}">Edit</a>
   <a href="{% url 'booking-delete' booking.id %}">Delete</a>
+  <a href="{% url 'booking-pdf' booking.id %}">Download PDF</a>
   <a href="{% url 'booking-index' %}">Back to List</a>
 {% endblock %}

@@ -32,12 +32,18 @@
 
   <form method="post" class="booking-form">
     {% csrf_token %}
+    <!-- Hidden room field to ensure it's always submitted -->
+    {% if form.instance.room %}
+      <input type="hidden" name="room" value="{{ form.instance.room.id }}">
+    {% endif %}
     <div class="form-fields">
       {% for field in form.visible_fields %}
+        {% if field.name != "room" %}
         <div class="form-group">
           {{ field.label_tag }} {{ field }}
           {% if field.errors %}<span class="form-error-inline">{{ field.errors.0 }}</span>{% endif %}
         </div>
+        {% endif %}
       {% endfor %}
     </div>
 

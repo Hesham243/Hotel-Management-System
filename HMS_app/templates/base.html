@@ -12,13 +12,15 @@
   </head>
   <body>
     <header>
-      <nav>
-        <ul>
+      <nav class="navbar-split">
+        <ul class="nav-left">
           <li><a href="{% url 'home' %}">Home</a></li>
           <li><a href="{% url 'Rooms' %}">Rooms</a></li>
           <li><a href="{% url 'services' %}">Services</a></li>
           <li><a href="{% url 'booking-index' %}">Bookings</a></li>
           <li><a href="{% url 'About' %}">About</a></li>
+        </ul>
+        <ul class="nav-right">
           {% if user.is_authenticated %}
             <li><a href="{% url 'profile' %}">Profile</a></li>
             <li>
@@ -37,5 +39,8 @@
     <main>
       {% block content %}{% endblock %}
     </main>
+    <footer>
+      <p>&copy; 2024 Hotel Management System. All rights reserved.</p>
+    </footer>
   </body>
 </html>

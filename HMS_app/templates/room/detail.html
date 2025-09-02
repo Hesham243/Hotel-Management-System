@@ -1,6 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
 {% block head %}
-  {% load static %}
   <link rel="stylesheet" href="{% static 'css/room/detail.css' %}">
 {% endblock %}
 
@@ -59,7 +59,20 @@
             </div>
         </aside>
     </section>
-
+    <section class="room-services">
+        <h2>Room Features</h2>
+        <div>
+            <ul>
+                <li><img src="{% static 'images/wifi.png' %}" alt="wifi">wi-fi</li>
+                <li></li>
+                <li><img src="{% static 'images/newspaper.png' %}" alt="newspaper">newspaper</li>
+                <li></li>
+                <li><img src="{% static 'images/plug.png' %}" alt="Power BackUp">Power BackUp</li>
+                <li></li>
+                <li><img src="{% static 'images/fridge.png' %}" alt="Refrigerator">Refrigerator</li>
+            </ul>
+        </div>
+    </section>
     <section class="hotel-services">
         <h2>Services</h2>
         <div class="services-grid">

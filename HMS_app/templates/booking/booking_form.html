@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/booking_form.css' %}">
+{% endblock %}
+{% block content %}
+<div class="reservation-container">
+  <h2 class="reservation-title">
+    <i class="fa-solid fa-bed"></i>
+    {% if form.instance.pk %}Edit Booking{% else %}Room Reservation{% endif %}
+  </h2>
+
+  {% if form.non_field_errors %}
+    <div class="form-error">
+      {% for error in form.non_field_errors %}
+        <div>{{ error }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if form.instance.room %}
+    <section class="room-summary">
+      <div class="room-info">
+        <i class="fa-solid fa-hotel"></i> <strong>Hotel:</strong> {{ form.instance.room.hotel.name }}<br>
+        <i class="fa-solid fa-door-closed"></i> <strong>Room Type:</strong> {{ form.instance.room.type }}<br>
+        <i class="fa-solid fa-users"></i> <strong>Max Occupancy:</strong> {{ form.instance.room.max_occupancy }}<br>
+        <i class="fa-solid fa-dollar-sign"></i> <strong>Price/Night:</strong> ${{ form.instance.room.price }}
+      </div>
+    </section>
+  {% endif %}
+
+  <form method="post" class="booking-form">
+    {% csrf_token %}
+    <div class="form-fields">
+      {% for field in form.visible_fields %}
+        <div class="form-group">
+          {{ field.label_tag }} {{ field }}
+          {% if field.errors %}<span class="form-error-inline">{{ field.errors.0 }}</span>{% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if total_nights and total_price %}
+      <div class="form-summary">
+        <i class="fa-solid fa-moon"></i> <strong>Total Nights:</strong> {{ total_nights }}<br>
+        <i class="fa-solid fa-money-bill"></i> <strong>Total Price:</strong> ${{ total_price }}
+      </div>
+    {% endif %}
+
+    <div class="form-actions">
+      <button type="submit" class="btn submit"><i class="fa-solid fa-check"></i> Save</button>
+      <a href="{% url 'booking-index' %}" class="btn secondary"><i class="fa-solid fa-times"></i> Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

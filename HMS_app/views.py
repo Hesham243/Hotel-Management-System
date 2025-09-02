@@ -2,6 +2,8 @@ import datetime
 from django import forms
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
+from urllib.parse import urlencode
+from django.conf import settings
 from django.views.generic import CreateView, UpdateView, DeleteView
 from .models import Hotel,Room,Booking,Profile,Services
 from .forms import BookingForm, ProfileForm
@@ -40,8 +42,24 @@ def service_detail(request, service_id):
     return render(request, 'service_detail.html', {'service': service})
 
 def home(request):
+    latitude = 26.241056
+    longitude = 50.576139
+    zoom = 13
+    size = "600x400"
+    marker_color = "red"
+    marker_label = "H"
+    params = {
+        "center": f"{latitude},{longitude}",
+        "zoom": zoom,
+        "size": size,
+        "markers": f"color:{marker_color}|label:{marker_label}|{latitude},{longitude}",
+        "key": settings.GOOGLE_MAPS_API_KEY,
+    }
+    map_url = f"https://maps.googleapis.com/maps/api/staticmap?{urlencode(params)}"
+    maps_link_url = f"https://www.google.com/maps/search/?api=1&query={latitude},{longitude}"
+    services = Services.objects.all()
     if request.user.is_authenticated:
-        return render(request, 'home.html')
+        return render(request, 'home.html', {'services': services, 'map_url': map_url, 'maps_link_url': maps_link_url})
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -50,7 +68,7 @@ def home(request):
             return redirect('home')
     else:
         form = AuthenticationForm()
-    return render(request, 'home.html', {'form': form, 'next': request.GET.get('next', '')})
+    return render(request, 'home.html', {'form': form, 'next': request.GET.get('next', ''), 'services': services, 'map_url': map_url, 'maps_link_url': maps_link_url})
 
 def about(request):
     return render(request, 'about.html')

@@ -14,20 +14,13 @@ html {
   --secondary: #f7f7fa;
   --accent: #e8b04a;
   --danger: #d9534f;
-  --text: #222;
+  --text: #100f0f;
   --border: #eaeaea;
   --radius: 6px;
   --shadow: 0 2px 8px rgba(0,0,0,0.05);
   font-size: 100%;
 }
 
-main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 16px;
-  width: 100%;
-  box-sizing: border-box;
-}
 
 h1, h2, h3 {
   margin-top: 0.7em;
@@ -57,10 +50,16 @@ h1, h2, h3 {
 
 header {
   padding: 0 0 8px 0;
+  background: #217dbb;
 }
 
 nav ul {
-  gap: 8px;
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  align-items: center;
 }
 
 @media only screen and (min-width: 768px) {
@@ -84,11 +83,11 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  background-color: #232427;
 }
 
 header {
-  background: var(--primary);
-  color: #fff;
+  background-color: rgba(255,255,255,0.12);
   padding: 0.5rem 0;
   box-shadow: var(--shadow);
 }
@@ -105,8 +104,9 @@ nav ul {
   margin: 0 2rem;
   display: flex;
   gap: 1.5rem;
+  margin: 0;
+  padding: 0;
   align-items: center;
-  justify-content: flex-end;
 }
 
 nav ul li {
@@ -133,10 +133,10 @@ nav a:hover, nav button:hover {
 }
 
 main {
-  max-width: 900px;
+  max-width: 100%;
   margin: 2rem auto 0 auto;
   padding: 2rem;
-  background: #fff;
+  background-color: #f8f9fc;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
@@ -182,6 +182,8 @@ hr {
   border-top: 1px solid var(--border);
   margin: 1.5rem 0;
 }
+
+/* Navigation Bar Styles */
 nav {
   display: flex;
   justify-content: space-between;
@@ -224,7 +226,38 @@ nav ul {
   align-items: center;
 }
 
+/* Remove these duplicate/redundant nav ul styles: */
+/*
+nav ul {
+  gap: 8px;
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 2rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+*/
 
+/* Use only this for nav ul if you want a base style: */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
 
 /* Responsive */
 @media (max-width: 700px) {

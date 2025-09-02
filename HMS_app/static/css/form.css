@@ -118,6 +118,10 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focu
     font-size: 1em;
     width: 32%;
   }
+  .profile {
+    padding: 1rem;
+    max-width: 98vw;
+  }
 }
 
 input[type="date"] {
@@ -135,4 +139,75 @@ input[type="date"] {
 input[type="date"]:focus {
   border: 1.5px solid #2461a6;
   outline: none;
+}
+.profile1 {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  color: #2461a6;
+}
+.profile {
+  background: #f7f7fa;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px #eaeaea;
+  max-width: 430px;
+  margin: 0 auto 2rem auto;
+  width: 100%;
+}
+.profile h2{
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  color: #2461a6;
+}
+.profile ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.1em;
+}
+.profile ul li {
+  margin-bottom: 0.8em;
+}
+.profile ul li strong {
+  color: #2461a6;
+  width: 120px;
+  display: inline-block;
+}
+.profile-form {
+  background: #f7f7fa;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px #eaeaea;
+  max-width: 430px;
+  margin: 0 auto;
+  width: 100%;
+}
+.profile-form h2{
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  color: #2461a6;
+}
+.profile-form form {
+  width: 100%;
+}
+.profile-form button[type="submit"] {
+  width: 100%;
+  margin-top: 1.2em;
+  background: #2ea44f;
+  color: #fff;
+  border: 2px solid #2ea44f;
+  border-radius: 6px;
+  padding: 0.65em 0;
+  font-size: 1.12em;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 1px 8px rgba(46,164,79,0.07);
+  transition: background 0.18s, color 0.18s;
+}
+.profile-form button[type="submit"]:hover {
+  background: #24913c;
+  color: #fff;
 }

@@ -207,12 +207,33 @@ nav ul {
 }
 
 .nav-left {
-  margin-left: 2rem; /* optional spacing from logo */
+  margin-right:10px;
 }
 
 .nav-right {
-  margin-right: 2rem; /* optional spacing from edge */
+  margin-left: 850px; 
 }
+.nav-right1 {
+  margin-left: 800px; 
+}
+
+.navbar-split {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
 
 
 /* Responsive */

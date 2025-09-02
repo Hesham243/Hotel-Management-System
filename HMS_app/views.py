@@ -250,6 +250,10 @@ class BookingUpdateView(LoginRequiredMixin, UpdateView):
             return self.form_invalid(form)
         return super().form_valid(form)
 
+    def form_invalid(self, form):
+        print(form.errors) 
+        return super().form_invalid(form)
+
 
 
 
@@ -322,4 +326,3 @@ def edit_profile(request):
 
 
 
-    

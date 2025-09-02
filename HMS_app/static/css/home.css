@@ -1,64 +1,45 @@
 /* Home Hero Section Styles */
-.home-hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 60vh;
-  background: linear-gradient(120deg, #eafbe7 0%, #f7f7f7 100%);
-  border-radius: 18px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-  margin: 32px 0 24px 0;
-  padding: 36px 18px 32px 18px;
-}
-
-.home-hero h1 {
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: #1a8000;
-  margin-bottom: 12px;
+.hero {
+  padding: 60px 0;
   text-align: center;
+  position: relative;
 }
 
-.home-desc {
-  font-size: 1.3rem;
-  color: #444;
-  margin-bottom: 28px;
-  text-align: center;
-  max-width: 500px;
-}
-
-.home-cta {
-  display: flex;
-  gap: 18px;
-  justify-content: center;
-  margin-top: 18px;
-}
-
-.home-cta .btn {
-  font-size: 1.2em;
-  padding: 10px 28px;
-  border-radius: 8px;
-  font-weight: 700;
-  box-shadow: 0 2px 8px rgba(26,128,0,0.07);
-}
-main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  height: 100%;
-}
-
-main > section {
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 10px 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
 }
 
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+.home-hero-img {
+  width: 33%;
+  max-width: 400px;
+  margin: 0 auto 2rem auto;
+  display: block;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 5px solid white;
+}
 .header-logo-container {
   display: none;
 }
@@ -106,24 +87,27 @@ main > section {
   margin-right: 0;
   margin-top: 16px;
 }
-img {
-  width: 10000px;
-  height: auto;
-  display: block;
-}
 .hotel-location {
-  margin-top: 2rem;
+  margin: 2rem auto;
   text-align: center;
+  width: 80%;
+  padding: 30px 0;
 }
-.hotel-location img {
-  width: 320px;
-  height: auto;
-  max-width: 90%;
+
+.hotel-location h2 {
+  font-size: 28px;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.map-container {
+  height: 400px;
+  background: #eee;
   border-radius: var(--radius);
+  overflow: hidden;
   box-shadow: var(--shadow);
-  margin: 0 auto;
-  display: block;
 }
+
 
 /* --- Add these styles to home.css --- */
 .hotel-services { margin-top: 2rem; }

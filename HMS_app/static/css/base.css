@@ -1,22 +1,12 @@
-/* static/css/base.css  */
-
 html {
   box-sizing: border-box;
 }
 
-/* The Universal Selector */
-*, /* All elements*/
-*::before, /* All ::before pseudo-elements */
+*,
+*::before, 
 *::after {
-  /* All ::after pseudo-elements */
-  /* height & width will now include border & padding by default
-     but can be over-ridden as needed */
   box-sizing: inherit;
 }
-
-/* resets font size to be 62.5% of the user preference - 
-     in most browser configurations this will be 10px */
-
 
 
 :root {
@@ -245,5 +235,147 @@ nav ul {
   nav ul {
     gap: 0.7rem;
     margin: 0 0.5rem;
+  }
+} 
+.site-footer {
+  background: #232427;
+  color: #e7e7e7;
+  padding: 2.5rem 0 0.5rem 0;
+  font-size: 1rem;
+  border-top: 1px solid #232427;
+  margin-top: 2rem;
+}
+.footer-social a,
+.footer-payments img {
+  margin-right: 10px;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: space-between;
+  gap: 2rem;
+  background-color: #222;
+}
+.footer-col {
+  min-width: 180px;
+  flex: 1;
+  margin-bottom: 1.2rem;
+}
+.footer-col h4 {
+  font-size: 1.04em;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+.footer-amenities,
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-amenities li,
+.footer-links li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.7em;
+  font-size: 1em;
+  color: #e7e7e7;
+}
+.footer-amenities img,
+.footer-social img,
+.footer-payments img {
+  width: 50px;
+  height: 50px;
+  margin-right: 0.75em;
+  background: #444;
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
+}
+.footer-social a {
+  margin-right: 1em;
+  display: inline-block;
+  transition: opacity 0.2s;
+}
+.footer-social a:hover {
+  opacity: 0.7;
+}
+.footer-payments img {
+  width: 45px;
+  height: 35px;
+  margin-right: 0.7em;
+  margin-bottom: 0.2em;
+  background: #fff;
+  border-radius: 4px;
+}
+.footer-newsletter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+}
+.footer-newsletter input[type="email"] {
+  padding: 0.5em 0.8em;
+  border-radius: 4px;
+  border: none;
+  background: #313236;
+  color: #fff;
+  font-size: 1em;
+  margin-bottom: 0.3em;
+}
+.footer-newsletter button {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  padding: 0.5em 0.8em;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.footer-newsletter button:hover {
+  background: #217dbb;
+}
+.footer-links a {
+  color: #e7e7e7;
+  text-decoration: none;
+  transition: color 0.17s;
+}
+.footer-links a:hover {
+  color: #3498db;
+}
+.footer-col ul li:last-child {
+  margin-bottom: 0;
+}
+.footer-copyright {
+  text-align: center;
+  font-size: 0.97em;
+  color: #bbb;
+  margin-top: 2.5rem;
+  padding: 0.7rem 0 0.2rem 0;
+  border-top: 1px solid #34353a;
+  letter-spacing: 0.1px;
+}
+@media (max-width: 1000px) {
+  .footer-container {
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+  .footer-col {
+    min-width: 160px;
+  }
+}
+@media (max-width: 700px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 1.3rem;
+  }
+  .footer-col {
+    width: 100%;
+    min-width: unset;
   }
 }

@@ -39,8 +39,46 @@
     <main>
       {% block content %}{% endblock %}
     </main>
-    <footer>
-      <p>&copy; 2024 Hotel Management System. All rights reserved.</p>
+    <footer class="site-footer">
+      <div class="footer-container">
+        <!-- Social Section -->
+        <div class="footer-col">
+          <h4>Follow Us On</h4>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><img src="{% static 'images/facebook.png' %}" alt="Facebook"></a>
+            <a href="#" aria-label="Twitter"><img src="{% static 'images/twitter.png' %}" alt="Twitter"></a>
+          </div>
+        </div>
+        <!-- Payment Section -->
+        <div class="footer-col">
+          <h4>Payment Accepted</h4>
+          <div class="footer-payments">
+            <img src="{% static 'images/visa.png' %}" alt="Visa">
+            <img src="{% static 'images/card.png' %}" alt="MasterCard">
+            <img src="{% static 'images/paypal.png' %}" alt="PayPal">
+          </div>
+        </div>
+        <!-- Newsletter Section -->
+        <div class="footer-col">
+          <h4>Get Notifications</h4>
+          <form class="footer-newsletter" method="post" action="#">
+            <input type="email" placeholder="Your email address" required />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+        <!-- Explore Section -->
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="#">Policies</a></li>
+            <li><a href="#">Terms And Conditions</a></li>
+            <li><a href="#">About Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        &copy; 2024 Hotel Management System. All rights reserved.
+      </div>
     </footer>
   </body>
 </html>

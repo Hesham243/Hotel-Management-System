@@ -92,10 +92,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': '<hotelcollector>',
+            'NAME': 'hotelcollector',
             'USER': 'Hesham',
             'PASSWORD': '123'
-            # The value of 'NAME' should match the value of 'NAME' you replaced.
         }
     }
 

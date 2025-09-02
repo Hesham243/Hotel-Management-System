@@ -8,6 +8,9 @@ django = "*"
 psycopg2-binary = "*"
 xhtml2pdf = "*"
 python-dotenv = "*"
+whitenoise = "*"
+gunicorn = "*"
+dj-database-url = "*"
 
 [dev-packages]
 

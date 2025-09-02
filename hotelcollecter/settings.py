@@ -126,6 +126,8 @@ LOGOUT_REDIRECT_URL = 'home'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+load_dotenv()
 # Third-party API keys
 # Set GOOGLE_MAPS_API_KEY in your environment for local/dev; fallback is a placeholder.
-GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY', 'AIzaSyC3zrZIP8cPt4B_z796qEYX94Drc78IxMU')
+GOOGLE_MAPS_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY')
+# GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY', 'AIzaSyC3zrZIP8cPt4B_z796qEYX94Drc78IxMU')

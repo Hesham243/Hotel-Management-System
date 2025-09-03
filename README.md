@@ -1,6 +1,6 @@
 ## Hotel-Management-System
 
-<img src="./public/pictures/" width="600" height="300" alt="picture of app">
+<img src="./HMS_app/static/images/image.png" width="600" height="300" alt="picture of app">
 
 - Done by: 
 - 1-Haider Marhoon
@@ -8,7 +8,7 @@
 - 3-Hesham Ahmed
 
 ## Hotel-Management-System Link
-https://
+https://soluna-hotel-7a19d46ffefe.herokuapp.com/
 
 
 ## 🏨 App Description:
@@ -26,9 +26,11 @@ We are excited to explore the challenges of this project, as mastering these tec
 
 ## 🔭 Getting started
 
-👉**Try here:** [Link of the app]()
+👉**Try here:** [Link of the app](https://soluna-hotel-7a19d46ffefe.herokuapp.com/)
 
-👉**Planning Materials:** [link of trello]()
+👉**Planning Materials:** [link of trello](https://trello.com/b/26tPJyay/hotel-management-system)
+
+👉**Demo App:** [Link of demo](https://demo.qloapps.com/)
 
 ## 💻 Technologies Used
 
@@ -39,9 +41,11 @@ We are excited to explore the challenges of this project, as mastering these tec
 
 ## 📚 Attributions
 
-- [Bootstrap]()
+- [Mdn](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [FLATICON](https://www.flaticon.com/)
 
 ## Next Steps
 
 - Do better UI
-- Admin of the list can delete any comment
+- improve database
+- Add more user features

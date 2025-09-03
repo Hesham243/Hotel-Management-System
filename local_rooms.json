@@ -1,0 +1,38 @@
+[
+{
+  "model": "HMS_app.room",
+  "pk": 1,
+  "fields": {
+    "hotel": 1,
+    "type": "Standard Room",
+    "price": "50.00",
+    "status": "available",
+    "max_occupancy": 2,
+    "total": 5
+  }
+},
+{
+  "model": "HMS_app.room",
+  "pk": 2,
+  "fields": {
+    "hotel": 1,
+    "type": "Deluxe Room",
+    "price": "90.00",
+    "status": "available",
+    "max_occupancy": 3,
+    "total": 4
+  }
+},
+{
+  "model": "HMS_app.room",
+  "pk": 3,
+  "fields": {
+    "hotel": 1,
+    "type": "Suite",
+    "price": "150.00",
+    "status": "available",
+    "max_occupancy": 4,
+    "total": 2
+  }
+}
+]

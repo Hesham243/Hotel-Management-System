@@ -80,6 +80,7 @@ WSGI_APPLICATION = 'hotelcollecter.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 
+
 if 'ON_HEROKU' in os.environ:
     DATABASES = {
         "default": dj_database_url.config(

@@ -15,7 +15,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.template.loader import get_template
 from django.http import HttpResponse
-from xhtml2pdf import pisa
 
 
 
@@ -141,6 +140,10 @@ def booking_detail(request, booking_id):
 
 @login_required(login_url='sign-in')
 def booking_pdf(request, booking_id):
+    try:
+        from xhtml2pdf import pisa
+    except ImportError:
+        return HttpResponse("PDF generation is currently unavailable. Please try again later.", status=503)
     booking = get_object_or_404(Booking, id=booking_id, user=request.user)
     template = get_template('booking/booking_pdf.html')
     customer = getattr(request.user, 'customer', None)

@@ -1,0 +1,12 @@
+[
+{
+  "model": "HMS_app.profile",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "full_name": "",
+    "email": "",
+    "phone_number": null
+  }
+}
+]

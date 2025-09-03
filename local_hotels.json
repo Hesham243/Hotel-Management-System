@@ -1,0 +1,13 @@
+[
+{
+  "model": "HMS_app.hotel",
+  "pk": 1,
+  "fields": {
+    "name": "Grand Palace Hotel",
+    "rating": "4.5",
+    "timezone": "Asia/Bahrain",
+    "checkin_time": "15:00:00",
+    "checkout_time": "11:00:00"
+  }
+}
+]

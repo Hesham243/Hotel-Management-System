@@ -1,0 +1,34 @@
+[
+{
+  "model": "HMS_app.roomimage",
+  "pk": 1,
+  "fields": {
+    "room": 1,
+    "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSEct9UfEIOY9ZO0vaTcAGKQkeS85p-s63HA&s"
+  }
+},
+{
+  "model": "HMS_app.roomimage",
+  "pk": 2,
+  "fields": {
+    "room": 1,
+    "image_url": "https://images.trvl-media.com/lodging/21000000/20990000/20984400/20984310/bf3fd081.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill"
+  }
+},
+{
+  "model": "HMS_app.roomimage",
+  "pk": 3,
+  "fields": {
+    "room": 2,
+    "image_url": "https://media.cnn.com/api/v1/images/stellar/prod/140127103345-peninsula-shanghai-deluxe-mock-up.jpg?q=w_2226,h_1449,x_0,y_0,c_fill"
+  }
+},
+{
+  "model": "HMS_app.roomimage",
+  "pk": 4,
+  "fields": {
+    "room": 3,
+    "image_url": "https://image-tc.galaxy.tf/wijpeg-ahh70663kj96l3li71p6hu5gl/deluxe-room-sea-view.jpg"
+  }
+}
+]

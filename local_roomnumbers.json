@@ -1,0 +1,74 @@
+[
+{
+  "model": "HMS_app.roomnumber",
+  "pk": 1,
+  "fields": {
+    "room": 1,
+    "number": 101
+  }
+},
+{
+  "model": "HMS_app.roomnumber",
+  "pk": 2,
+  "fields": {
+    "room": 1,
+    "number": 102
+  }
+},
+{
+  "model": "HMS_app.roomnumber",
+  "pk": 3,
+  "fields": {
+    "room": 1,
+    "number": 103
+  }
+},
+{
+  "model": "HMS_app.roomnumber",
+  "pk": 4,
+  "fields": {
+    "room": 1,
+    "number": 105
+  }
+},
+{
+  "model": "HMS_app.roomnumber",
+  "pk": 5,
+  "fields": {
+    "room": 2,
+    "number": 201
+  }
+},
+{
+  "model": "HMS_app.roomnumber",
+  "pk": 6,
+  "fields": {
+    "room": 2,
+    "number": 202
+  }
+},
+{
+  "model": "HMS_app.roomnumber",
+  "pk": 7,
+  "fields": {
+    "room": 2,
+    "number": 203
+  }
+},
+{
+  "model": "HMS_app.roomnumber",
+  "pk": 8,
+  "fields": {
+    "room": 3,
+    "number": 301
+  }
+},
+{
+  "model": "HMS_app.roomnumber",
+  "pk": 9,
+  "fields": {
+    "room": 3,
+    "number": 302
+  }
+}
+]

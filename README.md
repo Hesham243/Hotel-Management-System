@@ -29,7 +29,7 @@ Key aspects of the project:
 ## 🚀 Getting Started
 
 ### 🌐 Live Demo
-- **Check it here:** [HMS Live App](https://soluna-hotel.herokuapp.com/)  
+- **Check it here:** [HMS Live App](https://soluna-hotel-7a19d46ffefe.herokuapp.com/)  
 
 ### 📋 Planning Materials
 - ERD, wireframes, and user stories are available upon request.

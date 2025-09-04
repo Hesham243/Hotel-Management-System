@@ -112,5 +112,5 @@ Key aspects of the project:
 | Name          | Role                        | GitHub Profile                                    |
 |---------------|-----------------------------|-------------------------------------------------- |
 | Hesham Ahmed  | Full Stack Developer / Lead | [Hesham243](https://github.com/Hesham243)       |
-| Haider Marhoon| Full Stack Developer        | [HaiderGH](https://github.com/HaiderGH)         |
-| Khaled Jamal  | Full Stack Developer        | [KhaledJamal](https://github.com/KhaledJamal)   |
+| Haider Marhoon| Full Stack Developer        | [HaiderGH](https://github.com/HaiderMarhoon)         |
+| Khaled Jamal  | Full Stack Developer        | [KhaledJamal](https://github.com/k7dbh)   |

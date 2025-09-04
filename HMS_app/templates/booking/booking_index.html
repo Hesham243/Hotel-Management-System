@@ -27,14 +27,14 @@
     <tbody>
       {% for booking in bookings %}
       <tr>
-        <td>{{ booking.id }}</td>
-        <td>{{ booking.room }}</td>
-        <td>{{ booking.check_in_date }}</td>
-        <td>{{ booking.check_out_date }}</td>
-        <td>{{ booking.status }}</td>
-        <td>{{ booking.num_guests }}</td>
-        <td>{{ booking.total_amount }} {{ booking.currency }}</td>
-        <td>
+        <td data-label="ID">{{ booking.id }}</td>
+        <td data-label="Room">{{ booking.room }}</td>
+        <td data-label="Check-in">{{ booking.check_in_date }}</td>
+        <td data-label="Check-out">{{ booking.check_out_date }}</td>
+        <td data-label="Status">{{ booking.status }}</td>
+        <td data-label="Guests">{{ booking.num_guests }}</td>
+        <td data-label="Amount">{{ booking.total_amount }} {{ booking.currency }}</td>
+        <td data-label="Actions">
           <a href="{% url 'booking-detail' booking.id %}">View</a>
           {% if booking.status == 'confirmed' %}
             <a href="{% url 'booking-update' booking.id %}">Edit</a>

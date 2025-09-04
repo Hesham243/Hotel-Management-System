@@ -13,6 +13,8 @@ class Profile(models.Model):
     def __str__(self):
       return self.full_name
 
+
+
 class Hotel(models.Model):
     name = models.CharField(max_length=255)
     rating = models.DecimalField(
@@ -51,12 +53,14 @@ class Room(models.Model):
     return f"{self.type} - {self.hotel.name}"
 
 
+
 class RoomNumber(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="room_numbers")
     number = models.IntegerField()
     
     def __str__(self):
       return f"Room Number {self.number} in {self.room.type}"
+
 
 
 class RoomImage(models.Model):
@@ -115,6 +119,7 @@ class Booking(models.Model):
         raise ValidationError(f"Number of guests ({self.num_guests}) exceeds the maximum occupancy ({self.room.max_occupancy}) for this room.")
   
   
+
 class Services(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="services")
     name = models.CharField(max_length=100)
@@ -125,4 +130,3 @@ class Services(models.Model):
     
     def __str__(self):
       return self.name
-    

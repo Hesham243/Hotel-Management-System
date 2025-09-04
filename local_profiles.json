@@ -4,9 +4,9 @@
   "pk": 1,
   "fields": {
     "user": 1,
-    "full_name": "",
-    "email": "",
-    "phone_number": null
+    "full_name": "Hesham Ahmed",
+    "email": "hesham@gmail.com",
+    "phone_number": "33116384"
   }
 }
 ]

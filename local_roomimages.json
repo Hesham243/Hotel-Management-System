@@ -1,34 +1,74 @@
 [
 {
   "model": "HMS_app.roomimage",
-  "pk": 1,
+  "pk": 5,
   "fields": {
     "room": 1,
-    "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSEct9UfEIOY9ZO0vaTcAGKQkeS85p-s63HA&s"
+    "image_url": "https://webbox.imgix.net/images/xuqskkzainnhanwf/31032098-62c3-4e0a-8d87-b03e4c92b62a.jpg?auto=format,compress&fit=crop&crop=entropy"
   }
 },
 {
   "model": "HMS_app.roomimage",
-  "pk": 2,
+  "pk": 6,
   "fields": {
     "room": 1,
-    "image_url": "https://images.trvl-media.com/lodging/21000000/20990000/20984400/20984310/bf3fd081.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill"
+    "image_url": "https://media.istockphoto.com/id/1366246794/photo/standard-twin-room-in-hotel.jpg?s=612x612&w=0&k=20&c=FWGs33viYJKetViJFnd2wzkWNMBpB-6l88Tds7-HVnE="
   }
 },
 {
   "model": "HMS_app.roomimage",
-  "pk": 3,
+  "pk": 7,
+  "fields": {
+    "room": 1,
+    "image_url": "https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg"
+  }
+},
+{
+  "model": "HMS_app.roomimage",
+  "pk": 8,
+  "fields": {
+    "room": 1,
+    "image_url": "https://www.cpathens.com/app/uploads/sites/129/2023/04/ZON_3926-Edit.jpg"
+  }
+},
+{
+  "model": "HMS_app.roomimage",
+  "pk": 9,
   "fields": {
     "room": 2,
-    "image_url": "https://media.cnn.com/api/v1/images/stellar/prod/140127103345-peninsula-shanghai-deluxe-mock-up.jpg?q=w_2226,h_1449,x_0,y_0,c_fill"
+    "image_url": "https://image-tc.galaxy.tf/wijpeg-afu0zj5rhmyyirzditj3g96mk/deluxe-room-king-1-2000px.jpg"
   }
 },
 {
   "model": "HMS_app.roomimage",
-  "pk": 4,
+  "pk": 10,
+  "fields": {
+    "room": 2,
+    "image_url": "https://image-tc.galaxy.tf/wijpeg-8qd39xdpdfj0glktxmnux02vb/deluxe-room-twin-2-2000px_wide.jpg?crop=0%2C40%2C2000%2C1125"
+  }
+},
+{
+  "model": "HMS_app.roomimage",
+  "pk": 11,
+  "fields": {
+    "room": 2,
+    "image_url": "https://image-tc.galaxy.tf/wijpeg-azw1qbhwabnq4e7hbybb4kk9i/deluxe-room-king-2-2000px_wide.jpg?crop=0%2C83%2C2000%2C1125"
+  }
+},
+{
+  "model": "HMS_app.roomimage",
+  "pk": 12,
   "fields": {
     "room": 3,
-    "image_url": "https://image-tc.galaxy.tf/wijpeg-ahh70663kj96l3li71p6hu5gl/deluxe-room-sea-view.jpg"
+    "image_url": "https://www.area83.in/ElementImages/5bf8a789-2234-4321-921d-da46e0660d3b_rgallery.jpg"
+  }
+},
+{
+  "model": "HMS_app.roomimage",
+  "pk": 13,
+  "fields": {
+    "room": 3,
+    "image_url": "https://images.trvl-media.com/lodging/2000000/1950000/1942700/1942665/w3837h2160x3y0-05bc9751.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill"
   }
 }
 ]

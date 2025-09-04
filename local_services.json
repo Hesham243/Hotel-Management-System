@@ -6,20 +6,8 @@
     "hotel": 1,
     "name": "Laundry Service",
     "description": "Professional laundry and dry cleaning for your clothes, with same-day service available.",
-    "image": "https://freshscentlaundry.com/wp-content/uploads/2023/03/5-1.jpg",
-    "price": "0.50",
-    "currency": "BHD"
-  }
-},
-{
-  "model": "HMS_app.services",
-  "pk": 2,
-  "fields": {
-    "hotel": 1,
-    "name": "Free Wi-Fi",
-    "description": "Complimentary high-speed wireless internet access throughout the hotel.",
-    "image": "https://triphackr.com/wp-content/uploads/2012/04/free-wifi-hotel-dusseldorf.png",
-    "price": "0.00",
+    "image": "https://quicksmartwash.com/wp-content/uploads/2024/08/Commercial-Laundry-Services-for-Hospitality-Sector-jpg.webp",
+    "price": "5.00",
     "currency": "BHD"
   }
 },
@@ -30,8 +18,20 @@
     "hotel": 1,
     "name": "Restaurant Reservation",
     "description": "Priority booking at our in-house restaurant or partner dining venues.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Barbieri_-_ViaSophia25668.jpg/1200px-Barbieri_-_ViaSophia25668.jpg",
-    "price": "1.00",
+    "image": "https://media-cdn.tripadvisor.com/media/photo-s/18/2d/ef/06/the-most-popular-dining.jpg",
+    "price": "10.00",
+    "currency": "BHD"
+  }
+},
+{
+  "model": "HMS_app.services",
+  "pk": 4,
+  "fields": {
+    "hotel": 1,
+    "name": "GYM",
+    "description": "",
+    "image": "https://images.squarespace-cdn.com/content/v1/5696733025981d28a35ef8ab/954e09df-1889-4c41-906d-e857673711d9/new+123+1.jpg",
+    "price": "30.00",
     "currency": "BHD"
   }
 }

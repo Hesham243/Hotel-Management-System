@@ -18,7 +18,6 @@ from django.http import HttpResponse
 
 
 
-
 # Sign-in view for login
 def sign_in(request):
     if request.user.is_authenticated:
@@ -33,14 +32,17 @@ def sign_in(request):
         form = AuthenticationForm()
     return render(request, 'registration/sign-in.html', {'form': form, 'next': request.GET.get('next', '')})
 
+
+
 def services(request):
     services = Services.objects.all()
     return render(request, 'services.html', {'services': services})
 
-
 def service_detail(request, service_id):
     service = get_object_or_404(Services, id=service_id)
     return render(request, 'service_detail.html', {'service': service})
+
+
 
 def home(request):
     latitude = 26.241056
@@ -71,8 +73,13 @@ def home(request):
         form = AuthenticationForm()
     return render(request, 'home.html', {'form': form, 'next': request.GET.get('next', ''), 'services': services, 'map_url': map_url, 'maps_link_url': maps_link_url})
 
+
+
+
 def about(request):
     return render(request, 'about.html')
+
+
 
 @login_required(login_url='sign-in')
 def rooms(request):
@@ -88,6 +95,8 @@ def rooms(request):
             'available': available
         })
     return render(request, 'room/index.html', {"rooms": room_list})
+
+
 
 @login_required(login_url='sign-in')
 def room_detail(request, room_id):
@@ -107,6 +116,7 @@ def room_detail(request, room_id):
         'services': hotel_services,
     })
     
+
 
 @login_required(login_url='sign-in')
 def booking_index(request):
@@ -132,11 +142,15 @@ def booking_index(request):
         'cancelled_count': cancelled_count,
     })
 
+
+
 @login_required(login_url='sign-in')
 def booking_detail(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id, user=request.user)
     customer = getattr(request.user, 'customer', None)
     return render(request, 'booking/booking_detail.html', {'booking': booking, 'customer': customer})
+
+
 
 @login_required(login_url='sign-in')
 def booking_pdf(request, booking_id):
@@ -155,9 +169,7 @@ def booking_pdf(request, booking_id):
 
 
 
-
 # CBV for Booking Create
-
 class BookingCreateView(LoginRequiredMixin, CreateView):
     login_url = 'sign-in'
     model = Booking
@@ -244,9 +256,7 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 
 
 
-
 # CBV for Booking Update
-
 class BookingUpdateView(LoginRequiredMixin, UpdateView):
     login_url = 'sign-in'
     model = Booking
@@ -273,9 +283,7 @@ class BookingUpdateView(LoginRequiredMixin, UpdateView):
 
 
 
-
 # CBV for Booking Delete
-
 class BookingDeleteView(LoginRequiredMixin, DeleteView):
     login_url = 'sign-in'
     model = Booking
@@ -301,6 +309,8 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+
 
 def complete_profile(request):
     if request.method == 'POST':
@@ -328,6 +338,8 @@ def profile(request):
         form = ProfileForm(instance=profile)
     return render(request, 'registration/profile.html', {'profile': profile, 'form': form})
 
+
+
 @login_required(login_url='sign-in')
 def edit_profile(request):
     profile = get_object_or_404(Profile, user=request.user)
@@ -339,7 +351,3 @@ def edit_profile(request):
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'registration/profile_form.html', {'form': form})
-
-
-
-

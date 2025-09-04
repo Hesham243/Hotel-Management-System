@@ -1,51 +1,113 @@
-## Hotel-Management-System
+# 🏨 Hotel Management System
 
-<img src="./HMS_app/static/images/image.png" width="600" height="300" alt="picture of app">
+![HMS Screenshot](./HMS_app/static/images/image.png)
 
-- Done by: 
-- 1-Haider Marhoon
-- 2-Khaled Jamal
-- 3-Hesham Ahmed
+[![Django](https://img.shields.io/badge/Django-4.2-green?logo=django&logoColor=white)](https://www.djangoproject.com/)  
+[![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)](https://www.python.org/)  
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16.0-blue?logo=postgresql&logoColor=white)](https://www.postgresql.org/)  
+[![Heroku](https://img.shields.io/badge/Heroku-8.1-purple?logo=heroku&logoColor=white)](https://www.heroku.com/)  
 
-## Hotel-Management-System Link
-https://soluna-hotel-7a19d46ffefe.herokuapp.com/
+---
+
+## 📝 Project Description
+
+The **Hotel Management System (HMS)** is a full-stack web application designed to simplify hotel operations.  
+It allows staff to manage hotel profiles, rooms, reservations, and customer interactions efficiently.  
+
+Key aspects of the project:
+
+- **Frontend:** Django templates for dynamic, responsive web pages.  
+- **Backend:** Django framework with PostgreSQL database.  
+- **Database:** PostgreSQL for structured storage of hotels, rooms, and user data.  
+- **Authentication & Authorization:** Role-based login for admins and users.  
+- **CRUD Operations:** Full management of rooms, reservations, and user profiles.  
+- **Deployment:** Hosted on **Heroku** for public access.  
+- **Planning:** ERD, user stories, and wireframes designed prior to development.
+
+---
+
+## 🚀 Getting Started
+
+### 🌐 Live Demo
+- **Check it here:** [HMS Live App](https://soluna-hotel.herokuapp.com/)  
+
+### 📋 Planning Materials
+- ERD, wireframes, and user stories are available upon request.
+
+### 🗄️ Repository
+- [Hotel Management System Repository](https://github.com/Hesham243/Hotel-Management-System)
+
+### How to Use
+1. **Sign up** as a new user or **sign in** if you have an account.  
+2. Browse available rooms.  
+3. **Admins** can create, update, or delete profiles and rooms.    
+4. Users can book rooms and view their booking history, download their booking as a PDF.  
+
+---
+
+## ✨ Features
+
+- **User authentication** with role-based access (Admin, Staff, User).   
+- **Room management:** Create, update, and remove rooms with descriptions, prices, and availability.  
+- **Reservation system:** Users can book rooms and view their bookings.  
+- **Responsive design:** Works on desktop and mobile devices.  
+- Planned features: payment integration, advanced search/filtering.
+
+---
+
+## 🖼️ Screenshots
+
+### Home Page
+![Home Page](./HMS_app/static/images/image.png)
+
+### Room Listing Page
+![Rooms Page](./HMS_app/static/images/rooms.png)
+
+### Room Details Page
+![Room Details](./HMS_app/static/images/room-detail.png)
+
+### Bookings Page
+![Room Details](./HMS_app/static/images/bookings.png)
+
+### User Profile Page
+![User Profile](./HMS_app/static/images/profile.png)
+
+### Services Page
+![Services](./HMS_app/static/images/services.png)
 
 
-## 🏨 App Description:
+*These visuals highlight hotel browsing, room details, and booking management.*
 
-Welcome to our Hotel Management System, where your booking experience is streamlined for maximum convenience. Whether you’re a traveler seeking relaxation or a hotel manager looking to enhance efficiency, our platform caters to all your needs. Enjoy intuitive navigation, real-time availability, and easy communication with our dedicated support team. Explore various room types and pricing options tailored to fit every budget. Experience seamless management of reservations and enjoy your stay like never before!
+---
 
+## 💡 Technologies Used
 
-## 🔎 Background info:
+- **Frontend:** Django Templates, HTML, CSS, JavaScript  
+- **Backend:** Django, Python  
+- **Database:** PostgreSQL  
+- **Deployment:** Heroku  
 
-We are developing the Hotel Management System as part of our studies at General Assembly's Software Engineering Bootcamp. We chose to create this platform because we believe in the importance of seamless booking and exceptional hospitality experiences. This project presents a fantastic opportunity for us to hone our skills using Python and Django for both the frontend and backend, while leveraging SQL for our database management.
-
-In addition to building a robust booking system, we are implementing essential features such as real-time availability, user authentication, and secure payment processing. Our focus on creating an intuitive interface and efficient management tools reflects our commitment to enhancing the travel experience for both guests and hotel staff.
-
-We are excited to explore the challenges of this project, as mastering these technologies will be invaluable for our future careers as developers. We believe that our Hotel Management System will not only serve as a practical application of our skills but also contribute to our understanding of the hospitality industry.
-
-## 🔭 Getting started
-
-👉**Try here:** [Link of the app](https://soluna-hotel-7a19d46ffefe.herokuapp.com/)
-
-👉**Planning Materials:** [link of trello](https://trello.com/b/26tPJyay/hotel-management-system)
-
-👉**Demo App:** [Link of demo](https://demo.qloapps.com/)
-
-## 💻 Technologies Used
-
-- Html
-- CSS
-- SQL
-- Python / Django
+---
 
 ## 📚 Attributions
 
-- [Mdn](https://developer.mozilla.org/en-US/docs/Web/CSS)
-- [FLATICON](https://www.flaticon.com/)
+- [Bootstrap](https://getbootstrap.com/) for styling  
+- [Font Awesome](https://fontawesome.com/) for icons  
 
-## Next Steps
+---
 
-- Do better UI
-- improve database
-- Add more user features
+## 🚧 Next Steps
+
+- Add payment integration for bookings  
+- Enable search and filtering of hotels and rooms  
+- Implement email notifications for booking confirmations  
+
+---
+
+## 👥 Contributors
+
+| Name          | Role                        | GitHub Profile                                    |
+|---------------|-----------------------------|-------------------------------------------------- |
+| Hesham Ahmed  | Full Stack Developer / Lead | [Hesham243](https://github.com/Hesham243)       |
+| Haider Marhoon| Full Stack Developer        | [HaiderGH](https://github.com/HaiderGH)         |
+| Khaled Jamal  | Full Stack Developer        | [KhaledJamal](https://github.com/KhaledJamal)   |

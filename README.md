@@ -67,7 +67,10 @@ Key aspects of the project:
 ![Room Details](./HMS_app/static/images/room-detail.png)
 
 ### Bookings Page
-![Room Details](./HMS_app/static/images/bookings.png)
+![Bookings](./HMS_app/static/images/bookings.png)
+
+### Booking Details Page
+![Booking Details](./HMS_app/static/images/booking-details.png)
 
 ### User Profile Page
 ![User Profile](./HMS_app/static/images/profile.png)
